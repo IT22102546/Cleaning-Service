@@ -3,6 +3,8 @@ import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import mongoose from "mongoose";
+import authRoute from "./routes/auth.route.js";
+import userRoute from "./routes/user.route.js"
 
 dotenv.config();
 
@@ -24,3 +26,17 @@ const corsOptions = {
     origin: 'http://localhost:5173',
 };
 app.use(cors(corsOptions));
+
+app.use("/api/auth",authRoute);
+app.use("/api/user",userRoute); 
+
+
+app.use((err,req,res,next)=>{
+    const statusCode = err.statusCode || 500;
+    const message = err.message || 'Internal Server Error';
+    return res.status(statusCode).json({
+        success:false,
+        message,
+        statusCode
+    });
+})
