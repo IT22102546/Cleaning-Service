@@ -1,6 +1,7 @@
 import { Button, Label, TextInput } from "flowbite-react";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import { motion } from "framer-motion";
 
 export default function ResetPassword() {
     const { id, token } = useParams();
@@ -90,13 +91,21 @@ export default function ResetPassword() {
             backgroundRepeat: 'no-repeat',
         }}>
             <div className="flex p-3 max-w-3xl mx-auto flex-col md:flex-row md:items-center gap-20">
-                <div className="flex-1 mt-48">
+                <motion.div 
+                    className="flex-1"
+                    initial={{ x: -300, opacity: 0 }}
+                    animate={{ x: 0, opacity: 1 }}
+                    transition={{ duration: 1 }} className="flex-1 mt-48">
                     <Link to="/" className="text-5xl font-bold dark:text-white font-tangerine">
                         <span className="px-2 py-1 bg-gradient-to-r from-indigo-500 via purple-500 to-pink-500 text-white rounded-lg size-10/12">Furniture</span>Shop
                     </Link>
                     <p className="text-sm mt-5 font-cinzel font-gray font-semibold">Join with us to get quality Furnitues which suits for you</p>
-                </div>
-                <div className="flex-1 mt-24">
+                </motion.div>
+                <motion.div 
+                    className="flex-1"
+                    initial={{ x: 300, opacity: 0 }}
+                    animate={{ x: 0, opacity: 1 }}
+                    transition={{ duration: 1 }} className="flex-1 mt-24">
                     <p className="text-center text-2xl font-cinzel font-semibold">Enter New Password</p>
                     <form onSubmit={handleSubmit} className="flex flex-col gap-4 mt-5">
                      <div>
@@ -125,7 +134,7 @@ export default function ResetPassword() {
                     </form>
                     {error && <p className="text-red-600 mt-3">{error}</p>}
                     {message && <p className="text-green-600 mt-3">{message}</p>}
-                </div>
+                </motion.div>
             </div>
         </div>
     );

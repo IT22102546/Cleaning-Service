@@ -1,6 +1,7 @@
 import { Button, Label, TextInput, Spinner } from "flowbite-react";
 import { useState } from "react";
 import { Link, } from "react-router-dom";
+import { motion } from "framer-motion";
 
 export default function ForgetPassword() {
     const [email, setEmail] = useState("");
@@ -58,13 +59,21 @@ export default function ForgetPassword() {
             backgroundRepeat: 'no-repeat',
         }}>
             <div className="flex p-3 max-w-3xl mx-auto flex-col md:flex-row md:items-center gap-20">
-                <div className="flex-1 mt-48">
+                <motion.div 
+                    className="flex-1"
+                    initial={{ x: -300, opacity: 0 }}
+                    animate={{ x: 0, opacity: 1 }}
+                    transition={{ duration: 1 }} className="flex-1 mt-48">
                     <Link to ="/" className="text-5xl font-bold dark:text-white font-tangerine">
                         <span className="px-2 py-1 bg-gradient-to-r from-indigo-500 via purple-500 to-pink-500 text-white rounded-lg size-10/12">Company</span>Logo
                     </Link>
                     <p className="text-sm mt-5 font-cinzel font-gray font-semibold"></p>
-                </div>
-                <div className="flex-1 mt-24">
+                </motion.div>
+                <motion.div 
+                    className="flex-1"
+                    initial={{ x: 300, opacity: 0 }}
+                    animate={{ x: 0, opacity: 1 }}
+                    transition={{ duration: 1 }} className="flex-1 mt-24">
                     <p className="text-center text-2xl font-cinzel font-semibold">Reset Password</p>
                     <form onSubmit={sendLink} className="flex flex-col gap-4 mt-5">
                         <div>
@@ -81,7 +90,7 @@ export default function ForgetPassword() {
                         <span>Remembered your password?</span>
                         <Link to='/sign-in' className="text-red-500 font-semibold">Sign In</Link>
                     </div>
-                </div>
+                </motion.div>
             </div>
         </div>
     );
