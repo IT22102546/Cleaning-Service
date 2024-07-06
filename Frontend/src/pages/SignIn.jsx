@@ -123,7 +123,10 @@ export default function SignIn() {
                  
                 </form>
                 
-                
+                <div className="flex gap-2 text-sm mt-5 ">
+                    <span>Forget Password?</span>
+                    <Link to='/forgetPassword' className="text-blue-500">Click Here</Link>
+                </div>
 
                 <div className="flex gap-2 text-sm mt-5 ">
                     <span>Dont have an Account?</span>
