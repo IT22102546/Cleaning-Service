@@ -21,8 +21,8 @@ export default function Header() {
     }
   };
   return (
-    <Navbar className="border-b-2 relative z-50 bg-green-500">
-      <div className="container mx-auto flex flex-wrap items-center justify-between py-4">
+    <Navbar className="border-b-2 relative z-50 bg-transparent">
+      <div className="container mx-auto flex flex-wrap items-center justify-between py-4 ">
    
         <div className="flex items-center">
           <NavLink to="/" className="self-center whitespace-nowrap text-3xl font-semibold font-tangerine ml-0 md:ml-16">
@@ -35,7 +35,7 @@ export default function Header() {
           <NavLink 
             to="/" 
             className={({ isActive }) => 
-              isActive ? "text-black" : "text-white"
+              isActive ? "text-yellow-300" : "text-black"
             }
           >
             Home
@@ -43,7 +43,7 @@ export default function Header() {
           <NavLink 
             to="/category" 
             className={({ isActive }) => 
-              isActive ? "text-black" : "text-white"
+              isActive ? "text-yellow-300" : "text-black"
             }
           >
             Categories
@@ -52,7 +52,7 @@ export default function Header() {
           <NavLink 
             to="/service-page" 
             className={({ isActive }) => 
-              isActive ? "text-black" : "text-white"
+              isActive ? "text-yellow-300" : "text-black"
             }
           >
             Services
@@ -61,7 +61,7 @@ export default function Header() {
           <NavLink 
             to="/blogs" 
             className={({ isActive }) => 
-              isActive ?"text-black" : "text-white"
+              isActive ?"text-yellow-300" : "text-black"
             }
           >
             Blogs
