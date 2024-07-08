@@ -7,6 +7,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import DashBoard from "./pages/DashBoard";
 import ForgetPassword from "./pages/ForgerPassword";
 import ResetPassword from "./pages/ResetPassword";
+import Footer from "./components/Footer";
 
 export default function App() {
   return (
@@ -24,6 +25,7 @@ export default function App() {
           <Route path="/dashboard" element={<DashBoard/>}/> 
      <Route/>     
     </Routes>
+    <Footer/>
    </BrowserRouter>
   )
 }
