@@ -1,3 +1,4 @@
+import ContactForm from "../components/ContactUs";
 
 
 export default function Home() {
@@ -183,7 +184,7 @@ export default function Home() {
             </div>
           </div>
 
-
+      <ContactForm/>
 
       </div>
     </div>
