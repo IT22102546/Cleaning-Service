@@ -8,6 +8,9 @@ import DashBoard from "./pages/DashBoard";
 import ForgetPassword from "./pages/ForgerPassword";
 import ResetPassword from "./pages/ResetPassword";
 import Footer from "./components/Footer";
+import Services from "./pages/Services";
+import Categories from "./pages/Categories";
+import Blogs from "./pages/Blogs";
 
 export default function App() {
   return (
@@ -23,7 +26,10 @@ export default function App() {
 
     <Route element={<PrivateRoute/>}/>
           <Route path="/dashboard" element={<DashBoard/>}/> 
-     <Route/>     
+    <Route/>
+    <Route path="/service-page" element={<Services/>}/>
+    <Route path="/category" element={<Categories/>}/>
+    <Route path="/blogs" element={<Blogs/>}/>     
     </Routes>
     <Footer/>
    </BrowserRouter>
