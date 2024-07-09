@@ -1,4 +1,5 @@
 import ContactForm from "../components/ContactUs";
+import FeaturedProducts from "../components/FeaturedProducts";
 
 
 export default function Home() {
@@ -183,6 +184,7 @@ export default function Home() {
               </div>
             </div>
           </div>
+          <FeaturedProducts/>
 
       <ContactForm/>
 

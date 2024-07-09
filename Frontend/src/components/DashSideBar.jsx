@@ -62,15 +62,18 @@ export default function DashSideBar() {
                 </Sidebar.Item>
               </Link>
 
-              <Link to='/dashboard?tab=products' key="products">
+              
+
+              <Link to='/dashboard?tab=services' key="services">
                 <Sidebar.Item
-                  active={tab === 'products'}
+                  active={tab === 'services'}
                   icon={HiGift}
                   as='div'
                 >
                   Services
                 </Sidebar.Item>
               </Link>
+              
 
              
             </>

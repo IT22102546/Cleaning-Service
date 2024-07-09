@@ -149,7 +149,7 @@ export default function DashProfile() {
 
   return (
     <motion.div 
-      className="flex-1"
+      
       initial={{ y: -300, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 1 }} className='max-w-lg mx-auto p-3 w-full' >
@@ -245,7 +245,7 @@ export default function DashProfile() {
           {loading ? 'Loading..' : 'Update Account'}
         </Button>
         {currentUser.isAdmin && (
-          <Link to='/addservice'>
+          <Link to='/add-services'>
             <Button
               type='button'
               gradientDuoTone='purpleToBlue'
