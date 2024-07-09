@@ -7,6 +7,8 @@ export default function Home() {
       <div className="container mx-auto px-6 lg:px-8 py-12">
         <div className="flex flex-col lg:flex-row items-center mt-20">
         <section className="hero-section"></section>
+
+        {/* above code need to be copy in every page that you create */}
           <div className="lg:w-1/2 text-center lg:text-left">
             <h1 className="text-4xl font-bold text-gray-800 mb-4 font-baloo">
               Enjoy the best cleaning service for your home or workplace
