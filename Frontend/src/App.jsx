@@ -8,10 +8,17 @@ import DashBoard from "./pages/DashBoard";
 import ForgetPassword from "./pages/ForgerPassword";
 import ResetPassword from "./pages/ResetPassword";
 import Footer from "./components/Footer";
+
 import PostProduct from "./pages/PostServices";
 import ProductPage from "./pages/ServicePage";
 import UpdateProducts from "./pages/UpdateServices";
 import AddProducts from "./pages/Addservices";
+
+import Services from "./pages/Services";
+import Categories from "./pages/Categories";
+import Blogs from "./pages/Blogs";
+import BookingForm from "./pages/BookingForm";
+
 
 export default function App() {
   return (
@@ -29,10 +36,19 @@ export default function App() {
     
 
     <Route element={<PrivateRoute/>}/>
+
           <Route path="/dashboard" element={<DashBoard/>}/> 
           <Route path="/add-services" element={<AddProducts/>}/>
           <Route path="/update-product/:productId" element={<UpdateProducts/>}/>
      <Route/>     
+
+          <Route path="/dashboard" element={<DashBoard/>}/>
+          <Route path="/book-service" element={<BookingForm/>}/>
+    <Route/>
+    <Route path="/service-page" element={<Services/>}/>
+    <Route path="/category" element={<Categories/>}/>
+    <Route path="/blogs" element={<Blogs/>}/>     
+
     </Routes>
     <Footer/>
    </BrowserRouter>
