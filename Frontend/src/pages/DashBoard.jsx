@@ -3,8 +3,8 @@ import { useLocation } from "react-router-dom";
 import DashProfile from "../components/DashProfile";
 import DashUsers from "../components/DashUsers";
 import DashSideBar from "../components/DashSideBar";
-import DashProduct from "../components/DashProduct";
-import AddProducts from "./AddProducts";
+import DashProduct from "../components/DashServices";
+import AddProducts from "./Addservices";
 
 export default function DashBoard() {
   const location = useLocation();
