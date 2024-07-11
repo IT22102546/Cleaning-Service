@@ -243,8 +243,9 @@ export default function DashUsers() {
 
 
   return (
-    <div className='p-3 md:mx-auto'>
+    <div className='p-3 md:mx-auto mt-24'>
     <div className="mb-4 flex items-center justify-between">
+    <section className="hero-section"></section>
       <input
         type="text"
         placeholder="Search Users..."

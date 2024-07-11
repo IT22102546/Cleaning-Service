@@ -8,11 +8,6 @@ import DashBoard from "./pages/DashBoard";
 import ForgetPassword from "./pages/ForgerPassword";
 import ResetPassword from "./pages/ResetPassword";
 import Footer from "./components/Footer";
-import AddProducts from "./pages/AddProducts";
-import OnlyAdminPrivateRoute from "./components/OnlyAdminPrivateRoute";
-import UpdateProducts from "./pages/UpdateProduct";
-import PostProduct from "./pages/PostProduct";
-import ProductPage from "./pages/ProductPage";
 
 export default function App() {
   return (
@@ -31,13 +26,7 @@ export default function App() {
 
     <Route element={<PrivateRoute/>}/>
           <Route path="/dashboard" element={<DashBoard/>}/> 
-     <Route/>    
-
-      <Route element={<OnlyAdminPrivateRoute />}>
-      <Route path="/add-services" element={<AddProducts/>}/>
-          <Route path="/update-product/:productId" element={<UpdateProducts/>}/>
-        
-        </Route> 
+     <Route/>     
     </Routes>
     <Footer/>
    </BrowserRouter>

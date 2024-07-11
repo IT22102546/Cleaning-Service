@@ -21,14 +21,14 @@ export default function DashBoard() {
   return (
     <div
       className="min-h-screen flex flex-col md:flex-row"
-      style={{
-        backgroundImage: tab === 'profile'
-          ? `url('https://inkforall.com/wp-content/uploads/2022/07/cfcdda89-b020-9459-3944-108d2d8fe549-714x476.jpeg')`
-          : 'none',
-        backgroundSize: tab === 'profile' ? 'cover' : 'initial',
-        backgroundPosition: tab === 'profile' ? 'center' : 'initial',
-        backgroundRepeat: tab === 'profile' ? 'no-repeat' : 'initial',
-      }}
+      // style={{
+      //   backgroundImage: tab === 'profile'
+      //     ? `url('https://inkforall.com/wp-content/uploads/2022/07/cfcdda89-b020-9459-3944-108d2d8fe549-714x476.jpeg')`
+      //     : 'none',
+      //   backgroundSize: tab === 'profile' ? 'cover' : 'initial',
+      //   backgroundPosition: tab === 'profile' ? 'center' : 'initial',
+      //   backgroundRepeat: tab === 'profile' ? 'no-repeat' : 'initial',
+      // }}
     >
       <div className="md:w-56">
         <DashSideBar />
