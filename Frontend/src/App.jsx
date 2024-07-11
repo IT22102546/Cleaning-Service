@@ -12,6 +12,7 @@ import AddProducts from "./pages/AddProducts";
 import OnlyAdminPrivateRoute from "./components/OnlyAdminPrivateRoute";
 import UpdateProducts from "./pages/UpdateProduct";
 import PostProduct from "./pages/PostProduct";
+import ProductPage from "./pages/ProductPage";
 
 export default function App() {
   return (
@@ -25,6 +26,7 @@ export default function App() {
     <Route path="/forgetPassword" element={<ForgetPassword/>}/>
     <Route path="/resetpassword/:id/:token" element={<ResetPassword/>} />
     <Route path="/product/:productSlug" element={<PostProduct />} />
+    <Route path="/product-page" element={<ProductPage/>}/>
     
 
     <Route element={<PrivateRoute/>}/>

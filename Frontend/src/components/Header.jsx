@@ -50,7 +50,7 @@ export default function Header() {
           </NavLink>
          
           <NavLink 
-            to="/service-page" 
+             to="/product-page" 
             className={({ isActive }) => 
               isActive ? "text-yellow-300" : "text-black"
             }

@@ -1,8 +1,16 @@
 import ContactForm from "../components/ContactUs";
 import FeaturedProducts from "../components/FeaturedProducts";
+import { Link } from "react-router-dom";
 
 
 export default function Home() {
+
+  const categories = [
+    { name: 'BedRoomFurniture', imageUrl: 'https://mywayneshome.com/cdn/shop/files/media_a713c2af-9e72-4304-8452-ed6f8aca5b86_grande.jpg?v=1712009056' },
+    { name: 'LivingRoomFurniture', imageUrl: 'https://d2kz53n3bzvihv.cloudfront.net/resized/790_395_0_255_255_255/media/gbu0/categoryxxl/image/DesktopHeader-P393_LLA005_LLA008_LLA010_A.jpg.jpeg' },
+    { name: 'DinningRoomFurniture', imageUrl: 'https://furnituretogocatalogs.com/cdn/shop/products/312a1665-ce0e-4cfe-9567-7d1c55aee59f.jpg?v=1705683723' },
+    { name: 'SofaSets', imageUrl: 'https://m.media-amazon.com/images/I/71qKarjtXpL._AC_SL1491_.jpg' },
+];
   return (
     <div className="relative bg-white min-h-screen flex items-center justify-center">
       <div className="container mx-auto px-6 lg:px-8 py-12">
@@ -129,59 +137,29 @@ export default function Home() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+            {categories.map((category, index) => (
+              
               <div className="bg-white shadow-md rounded-lg overflow-hidden">
                 <img src="/services/commercial-cleaning.jpeg" alt="Commercial Cleaning" className="w-full h-48 object-cover"/>
                 <div className="p-6">
-                  <h2 className="text-xl font-bold mb-2">COMMERCIAL CLEANING SERVICES</h2>
+                  <h2 className="text-xl font-bold mb-2">{category.name}</h2>
                   <p className="text-gray-700 mb-4">We proudly announce that we are the leading Commercial office cleaning supplier...</p>
-                  <a href="#" className="text-blue-600 hover:underline">READ MORE &rarr;</a>
+                  <Link to={`/product-page?category=${category.name}`}>
+                  <h3 className="text-blue-600 hover:underline">VISIT MORE &rarr;</h3>
+                  </Link>
                 </div>
               </div>
+                ))}
 
-              <div className="bg-white shadow-md rounded-lg overflow-hidden">
-                <img src="/services/house-cleaning.jpg" alt="House Cleaning" className="w-full h-48 object-cover"/>
-                <div className="p-6">
-                  <h2 className="text-xl font-bold mb-2">HOUSE CLEANING SERVICES</h2>
-                  <p className="text-gray-700 mb-4">Our well-trained permanent uniformed staff will ensure detailed cleaning and privacy in all homes...</p>
-                  <a href="#" className="text-blue-600 hover:underline">READ MORE &rarr;</a>
-                </div>
-              </div>
+              
 
-              <div className="bg-white shadow-md rounded-lg overflow-hidden">
-                <img src="/services/road-cleaning.jpg" alt="Tea Serving" className="w-full h-48 object-cover"/>
-                <div className="p-6">
-                  <h2 className="text-xl font-bold mb-2">TEA SERVING SERVICES</h2>
-                  <p className="text-gray-700 mb-4">Our well-mannered energetic young stewards will serve tea and coffee to your employees and clients...</p>
-                  <a href="#" className="text-blue-600 hover:underline">READ MORE &rarr;</a>
-                </div>
-              </div>
+           
 
-              <div className="bg-white shadow-md rounded-lg overflow-hidden">
-                <img src="/services/commercial-cleaning.jpeg" alt="Commercial Cleaning" className="w-full h-48 object-cover"/>
-                <div className="p-6">
-                  <h2 className="text-xl font-bold mb-2">COMMERCIAL CLEANING SERVICES</h2>
-                  <p className="text-gray-700 mb-4">We proudly announce that we are the leading Commercial office cleaning supplier...</p>
-                  <a href="#" className="text-blue-600 hover:underline">READ MORE &rarr;</a>
-                </div>
-              </div>
+              
+             
 
-              <div className="bg-white shadow-md rounded-lg overflow-hidden">
-                <img src="/services/house-cleaning.jpg" alt="House Cleaning" className="w-full h-48 object-cover"/>
-                <div className="p-6">
-                  <h2 className="text-xl font-bold mb-2">HOUSE CLEANING SERVICES</h2>
-                  <p className="text-gray-700 mb-4">Our well-trained permanent uniformed staff will ensure detailed cleaning and privacy in all homes...</p>
-                  <a href="#" className="text-blue-600 hover:underline">READ MORE &rarr;</a>
-                </div>
-              </div>
-
-              <div className="bg-white shadow-md rounded-lg overflow-hidden">
-                <img src="/services/road-cleaning.jpg" alt="Tea Serving" className="w-full h-48 object-cover"/>
-                <div className="p-6">
-                  <h2 className="text-xl font-bold mb-2">TEA SERVING SERVICES</h2>
-                  <p className="text-gray-700 mb-4">Our well-mannered energetic young stewards will serve tea and coffee to your employees and clients...</p>
-                  <a href="#" className="text-blue-600 hover:underline">READ MORE &rarr;</a>
-                </div>
-              </div>
+             
             </div>
           </div>
           <FeaturedProducts/>
