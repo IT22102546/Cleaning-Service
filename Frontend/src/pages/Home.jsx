@@ -141,7 +141,7 @@ export default function Home() {
 
             {categories.map((category, index) => (
               
-              <div className="bg-white shadow-md rounded-lg overflow-hidden">
+              <div className="bg-white shadow-md rounded-lg overflow-hidden" key={category._id}>
                 <img src="/services/commercial-cleaning.jpeg" alt="Commercial Cleaning" className="w-full h-48 object-cover"/>
                 <div className="p-6">
                   <h2 className="text-xl font-bold mb-2">{category.name}</h2>
@@ -153,14 +153,6 @@ export default function Home() {
               </div>
                 ))}
 
-              
-
-           
-
-              
-             
-
-             
             </div>
           </div>
           <FeaturedProducts/>
