@@ -152,7 +152,7 @@ export default function Header() {
             Categories
           </NavLink>
           <NavLink 
-            to="/service-page" 
+             to="/product-page" 
             className={({ isActive }) => 
               isActive ? "text-yellow-300" : "text-black"
             }

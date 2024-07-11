@@ -247,7 +247,7 @@ export default function DashProfile() {
           {loading ? 'Loading..' : 'Update Account'}
         </Button>
         {currentUser.isAdmin && (
-          <Link to='/addservice'>
+          <Link to='/add-services'>
             <Button
               type='button'
               gradientDuoTone='purpleToBlue'
