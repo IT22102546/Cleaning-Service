@@ -84,6 +84,7 @@ export default function PostProduct() {
     <div className="relative bg-white min-h-screen flex items-center justify-center">
       <div className="container mx-auto px-6 lg:px-8 py-12">
         <div className="flex flex-col lg:flex-row items-center mt-20">
+        <section className="hero-section"></section>
           <div className="p-3 max-w-5xl mx-auto min-h-screen">
             {notification.visible && (
               <div className="fixed top-0 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-4 py-2 rounded shadow-md">
@@ -100,7 +101,7 @@ export default function PostProduct() {
                       alt={`Product Image ${index + 1}`}
                       className={`cursor-pointer ${
                         index === mainImageIndex
-                          ? "border-4 border-teal-500"
+                          ? "border-4 border-orange-500"
                           : "border"
                       }`}
                       onClick={() => setMainImageIndex(index)}
@@ -149,7 +150,9 @@ export default function PostProduct() {
                   >
                     Add to Cart
                   </button>
+
                   <Button className="bg-slate-400">Buy Product</Button>
+                  
                 </div>
               </div>
             </div>
