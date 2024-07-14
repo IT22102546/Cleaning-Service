@@ -14,7 +14,7 @@ import ProductPage from "./pages/ServicePage";
 import UpdateProducts from "./pages/UpdateServices";
 import AddProducts from "./pages/Addservices";
 
-import Services from "./pages/Services";
+import Services from "./pages/ServicePage";
 import Categories from "./pages/Categories";
 import Blogs from "./pages/Blogs";
 import BookingForm from "./pages/BookingForm";
