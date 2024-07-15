@@ -34,7 +34,7 @@ export default function DashSideBar() {
   };
 
   return (
-    <Sidebar className="w-full md:w-56">
+    <Sidebar className="w-full md:w-56 mt-20">
         
         <Sidebar.Items >
         <Sidebar.ItemGroup>
@@ -62,15 +62,18 @@ export default function DashSideBar() {
                 </Sidebar.Item>
               </Link>
 
-              <Link to='/dashboard?tab=products' key="products">
+              
+
+              <Link to='/dashboard?tab=services' key="services">
                 <Sidebar.Item
-                  active={tab === 'products'}
+                  active={tab === 'services'}
                   icon={HiGift}
                   as='div'
                 >
                   Services
                 </Sidebar.Item>
               </Link>
+              
 
              
             </>

@@ -149,11 +149,12 @@ export default function DashProfile() {
 
   return (
     <motion.div 
-      className="flex-1"
+      
       initial={{ y: -300, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 1 }} className='max-w-lg mx-auto p-3 w-full' >
-      <h1 className='my-7 text-center font-semibold text-3xl text-white'>{getProfileHeader()}</h1>
+      transition={{ duration: 1 }}
+      className='max-w-lg mx-auto p-3 w-full mt-20' >
+      <h1 className='my-7 text-center font-semibold text-3xl text-dark'>{getProfileHeader()}</h1>
       <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
         <input
           type='file'
@@ -162,6 +163,7 @@ export default function DashProfile() {
           ref={filePickerRef}
           hidden
         />
+        <section className="hero-section"></section>
         <div
           className='relative w-32 h-32 self-center cursor-pointer shadow-md overflow-hidden rounded-full'
           onClick={() => filePickerRef.current.click()}
@@ -245,7 +247,7 @@ export default function DashProfile() {
           {loading ? 'Loading..' : 'Update Account'}
         </Button>
         {currentUser.isAdmin && (
-          <Link to='/addservice'>
+          <Link to='/add-services'>
             <Button
               type='button'
               gradientDuoTone='purpleToBlue'

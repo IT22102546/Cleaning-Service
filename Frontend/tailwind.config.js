@@ -9,10 +9,14 @@ export default {
   ],
   theme: {
     extend: {
+      colors: {
+        secondary: '#F97300',
+      },
       fontFamily: {
         tangerine: ['Tangerine'],
         cinzel: ['Cinzel'],
         Lavish: ['sans-serif'],
+        Baloo: ['Baloo 2']
       },
     },
   },
