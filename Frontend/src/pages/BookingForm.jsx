@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Alert } from "flowbite-react";
+import { useSelector } from "react-redux";
 
 export default function BookingForm() {
   const [loading, setLoading] = useState(true);
@@ -7,9 +9,9 @@ export default function BookingForm() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState();
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.id]: e.target.value.trim() });
+    setFormData({ ...formData, id:currentUser._id, [e.target.id]: e.target.value.trim() });
   };
-
+  const { currentUser } = useSelector((state) => state.user);
   const handleSubmit = async (e) => {
     e.preventDefault();
     // if (!formData.na || !formData.email || !formData.mobile || !formData.adress) {
@@ -229,6 +231,14 @@ export default function BookingForm() {
                 </button>
               </form>
             </div>
+
+            <div className="text-red-600">
+                        {error && (
+                            <Alert className="mt-5" color="failure">
+                                {error}
+                            </Alert>
+                        )}
+                    </div>
 
             <div className="mt-5 md:hidden">
               <div className="p-4 bg-secondary text-white w-11/12 mx-auto rounded-md shadow-md">

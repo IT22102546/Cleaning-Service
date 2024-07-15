@@ -30,9 +30,11 @@ export const getBooking = async (req, res, next) => {
 
 export const createBooking = async (req, res, next) => {
   // const { email, password } = req.body;
-  // if (!email || !password || email === "" || password === "") {
-  //   next(errorHandler(400, "All fields are required"));
-  // }
+  if (!req.body._id || !req.body.name || !req.body.phone || !req.body.address || !req.body.city || !req.body.state || !req.body.zip || !req.body.payment
+    || !req.body.allergies || !req.body.additional || !req.body.serviceType || !req.body.date || !req.body.email
+  ) {
+    next(errorHandler(400, "All fields are required"));
+  }
   // try {
   //   const validUser = await User.findOne({ email });
   //   if (!validUser) return next(errorHandler(404, "User not found!"));
