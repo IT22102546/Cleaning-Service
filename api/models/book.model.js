@@ -9,12 +9,14 @@ const bookingSchema = new mongoose.Schema({
   email: {
     type: String,
     required: true,
+    unique:true,
     trim: true,
     match: [/.+\@.+\..+/, 'Please fill a valid email address']
   },
   phone: {
     type: String,
     required: true,
+    unique:true,
     trim: true
   },
   serviceType: {
@@ -51,10 +53,7 @@ const bookingSchema = new mongoose.Schema({
     required: true,
     enum: ['credit-card', 'paypal', 'cash']
   },
-  referral: {
-    type: String,
-    trim: true
-  },
+  
   allergies: {
     type: String,
     trim: true
