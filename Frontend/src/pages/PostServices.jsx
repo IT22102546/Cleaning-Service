@@ -4,6 +4,7 @@ import { Alert, Button, TextInput } from "flowbite-react";
 import { FaPlus, FaMinus } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../redux/cart/cartSlice";
+import { Link } from "react-router-dom";
 
 export default function PostProduct() {
   const { productSlug } = useParams();
@@ -150,9 +151,10 @@ export default function PostProduct() {
                   >
                     Add to Cart
                   </button>
+                  <Link to='/book-service'>
+                    <Button className="bg-slate-400">Buy Product</Button>
+                  </Link>
 
-                  <Button className="bg-slate-400">Buy Product</Button>
-                  
                 </div>
               </div>
             </div>
