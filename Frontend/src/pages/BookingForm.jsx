@@ -1,6 +1,45 @@
-import ContactForm from "../components/ContactUs";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function BookingForm() {
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState();
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.id]: e.target.value.trim() });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    // if (!formData.na || !formData.email || !formData.mobile || !formData.adress) {
+    //     return setError('Please Fill all Fields');
+    // }
+
+    try {
+      setLoading(true);
+      setError(false);
+      const res = await fetch("/api/book/create-book", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await res.json();
+      console.log(data);
+      setLoading(false);
+      if (data.success === false) {
+        setError(data.message);
+        return;
+      }
+      //navigate('/sign-in');
+    } catch (error) {
+      setLoading(false);
+      setError(error.message);
+    }
+  };
   return (
     <div className="relative bg-white min-h-screen flex items-center justify-center">
       <div className="container mx-auto px-6 lg:px-8 py-12">
@@ -13,7 +52,9 @@ export default function BookingForm() {
               <h2 className="text-2xl font-bold mb-6 text-secondary">
                 Book An Appointment
               </h2>
-              <form>
+
+              
+              <form onSubmit={handleSubmit}>
                 <div className="mx-auto flex flex-wrap gap-5 justify-center">
                   <div>
                     <div className="mb-4">
@@ -24,8 +65,9 @@ export default function BookingForm() {
                       <input
                         type="text"
                         id="name"
-                        className="appearance-none block w-full bg-orange-50 text-gray-700 border border-orange-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" 
+                        className="appearance-none block w-full bg-orange-50 text-gray-700 border border-orange-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                         placeholder="Jane"
+                        onChange={handleChange}
                       />
                     </div>
 
@@ -39,6 +81,7 @@ export default function BookingForm() {
                         id="email"
                         className="appearance-none block w-full bg-orange-50 text-gray-700 border border-orange-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                         placeholder="jane@example.com"
+                        onChange={handleChange}
                       />
                     </div>
 
@@ -52,6 +95,7 @@ export default function BookingForm() {
                         id="phone"
                         className="appearance-none block w-full bg-orange-50 text-gray-700 border border-orange-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                         placeholder="123-456-7890"
+                        onChange={handleChange}
                       />
                     </div>
 
@@ -62,7 +106,7 @@ export default function BookingForm() {
                       <select
                         id="serviceType"
                         className="appearance-none block w-full bg-orange-50 text-gray-700 border border-orange-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-
+                        onChange={handleChange}
                       >
                         <option value="regular">Regular Cleaning</option>
                         <option value="deep">Deep Cleaning</option>
@@ -81,7 +125,7 @@ export default function BookingForm() {
                         type="date"
                         id="date"
                         className="appearance-none block w-full bg-orange-50 text-gray-700 border border-orange-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                        
+                        onChange={handleChange}
                       />
                     </div>
 
@@ -94,6 +138,7 @@ export default function BookingForm() {
                         id="address"
                         className="appearance-none block w-full bg-orange-50 text-gray-700 border border-orange-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                         placeholder="123 Main St"
+                        onChange={handleChange}
                       />
                     </div>
 
@@ -107,6 +152,7 @@ export default function BookingForm() {
                         id="city"
                         className="appearance-none block w-full bg-orange-50 text-gray-700 border border-orange-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                         placeholder="Colombo"
+                        onChange={handleChange}
                       />
                     </div>
                   </div>
@@ -122,6 +168,7 @@ export default function BookingForm() {
                         id="state"
                         className="appearance-none block w-full bg-orange-50 text-gray-700 border border-orange-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                         placeholder="Western"
+                        onChange={handleChange}
                       />
                     </div>
 
@@ -135,6 +182,7 @@ export default function BookingForm() {
                         id="zip"
                         className="appearance-none block w-full bg-orange-50 text-gray-700 border border-orange-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                         placeholder="12345"
+                        onChange={handleChange}
                       />
                     </div>
 
@@ -145,6 +193,7 @@ export default function BookingForm() {
                       <select
                         id="payment"
                         className="appearance-none block w-full bg-orange-50 text-gray-700 border border-orange-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                        onChange={handleChange}
                       >
                         <option value="credit-card">Credit Card</option>
                         <option value="paypal">PayPal</option>
@@ -157,6 +206,7 @@ export default function BookingForm() {
                         Any Allergies or Sensitivities
                       </label>
                       <textarea
+                        onChange={handleChange}
                         id="allergies"
                         className="appearance-none block w-full bg-orange-50 text-gray-700 border border-orange-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                       ></textarea>
@@ -167,28 +217,33 @@ export default function BookingForm() {
                         Special Instructions or Requests
                       </label>
                       <textarea
+                        onChange={handleChange}
                         id="additional"
                         className="appearance-none block w-full bg-orange-50 text-gray-700 border border-orange-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                       ></textarea>
                     </div>
                   </div>
                 </div>
-                <button
-                  type="submit"
-                  className="w-full p-3 bg-customYellow text-white font-bold rounded-md bg-secondary hover:bg-orange-500"
-                >
+                <button className="w-full p-3 bg-customYellow text-white font-bold rounded-md bg-secondary hover:bg-orange-500">
                   Schedule Now
                 </button>
               </form>
-              
             </div>
 
             <div className="mt-5 md:hidden">
-                <div className="p-4 bg-secondary text-white w-11/12 mx-auto rounded-md shadow-md">
-                <h1 className="text-lg mb-2">Appointment Confirmation Process</h1>
-                    <p>Once you submit your appointment request, it will be reviewed by our service team. Upon approval, you will receive a confirmation with the scheduled date and time. Our service provider will arrive at the specified time to fulfill your cleaning needs. Thank you for choosing our services!</p>
-                </div>
+              <div className="p-4 bg-secondary text-white w-11/12 mx-auto rounded-md shadow-md">
+                <h1 className="text-lg mb-2">
+                  Appointment Confirmation Process
+                </h1>
+                <p>
+                  Once you submit your appointment request, it will be reviewed
+                  by our service team. Upon approval, you will receive a
+                  confirmation with the scheduled date and time. Our service
+                  provider will arrive at the specified time to fulfill your
+                  cleaning needs. Thank you for choosing our services!
+                </p>
               </div>
+            </div>
           </div>
 
           <div className="hidden md:block lg:w-1/2 mt-8 lg:mt-0 ">
@@ -202,8 +257,17 @@ export default function BookingForm() {
               </div>
               <div>
                 <div className="p-4 bg-secondary text-white w-11/12 mx-auto rounded-md shadow-md">
-                <h1 className="text-lg mb-2">Appointment Confirmation Process</h1>
-                    <p>Once you submit your appointment request, it will be reviewed by our service team. Upon approval, you will receive a confirmation with the scheduled date and time. Our service provider will arrive at the specified time to fulfill your cleaning needs. Thank you for choosing our services!</p>
+                  <h1 className="text-lg mb-2">
+                    Appointment Confirmation Process
+                  </h1>
+                  <p>
+                    Once you submit your appointment request, it will be
+                    reviewed by our service team. Upon approval, you will
+                    receive a confirmation with the scheduled date and time. Our
+                    service provider will arrive at the specified time to
+                    fulfill your cleaning needs. Thank you for choosing our
+                    services!
+                  </p>
                 </div>
               </div>
               <div className="absolute top-0 right-10 mt-10 mr-4">
@@ -226,10 +290,7 @@ export default function BookingForm() {
           </div>
         </div>
 
-        
-
         <br />
-        
       </div>
     </div>
   );

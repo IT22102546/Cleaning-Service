@@ -19,6 +19,7 @@ export default function PostProduct() {
   });
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.currentUser);
+  const [formData, setFormData] = useState();
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -80,6 +81,7 @@ export default function PostProduct() {
   if (error) {
     return <Alert color="failure">{error}</Alert>;
   }
+
 
   return (
     <div className="relative bg-white min-h-screen flex items-center justify-center">

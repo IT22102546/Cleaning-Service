@@ -40,10 +40,10 @@ export default function App() {
           <Route path="/dashboard" element={<DashBoard/>}/> 
           <Route path="/add-services" element={<AddProducts/>}/>
           <Route path="/update-product/:productId" element={<UpdateProducts/>}/>
+          <Route path="/book-service" element={<BookingForm/>}/>
      <Route/>     
 
           <Route path="/dashboard" element={<DashBoard/>}/>
-          <Route path="/book-service" element={<BookingForm/>}/>
     <Route/>
     <Route path="/service-page" element={<Services/>}/>
     <Route path="/category" element={<Categories/>}/>
