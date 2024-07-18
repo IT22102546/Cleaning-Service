@@ -4,178 +4,138 @@ import { HiGift, HiOutlineExclamationCircle } from "react-icons/hi";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import html2pdf from 'html2pdf.js';
+import { data } from "autoprefixer";
 
 export default function DashBookingRequests() {
   const { currentUser } = useSelector((state) => state.user);
-  const [userProduct, setUserProduct] = useState([]);
+  const [requests, setRequests] = useState([]);
   const [showModel, setShowModel] = useState(false);
   const [productIdToDelete, setProductIdToDelete] = useState('');
-  const [totalProducts, setTotalProducts] = useState(0);
-  const [lastMonthProducts, setlastMonthProducts] = useState(0);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [totalRequests, setTotalRequests] = useState(0);
+  const [lastMonthRequests, setlastMonthRequests] = useState(0);
+  //const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
-    const fetchProducts = async () => {
+    const fetchRequests = async () => {
       try {
-        const res = await fetch(`/api/products/getproducts?searchTerm=${searchTerm}`);
+        const res = await fetch(`/api/book/get-bookings`);
         const data = await res.json();
         if (res.ok) {
-          setUserProduct(data.products);
-          setTotalProducts(data.totalProducts);
-          setlastMonthProducts(data.lastMonthProducts);
+          setRequests(data.requests);
+          setTotalRequests(data.totalRequests);
+          setlastMonthRequests(data.lastMonthRequests);
         }
       } catch (error) {
         console.log(error.message);
       }
     };
 
-    fetchProducts();
-  }, [searchTerm]);
+    fetchRequests();
+  }, [data]);
 
-  const handleDeleteProduct = async () => {
-    setShowModel(false);
-    try {
-      const res = await fetch(
-        `/api/products/deleteproduct/${productIdToDelete}/${currentUser._id}`,
-        {
-          method: 'DELETE',
-        }
-      );
-      const data = await res.json();
-      if (!res.ok) {
-        console.log(data.message);
-      } else {
-        setUserProduct((prev) =>
-          prev.filter((product) => product._id !== productIdToDelete)
-        );
-      }
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
+//   const handleDeleteProduct = async () => {
+//     setShowModel(false);
+//     try {
+//       const res = await fetch(
+//         `/api/products/deleteproduct/${productIdToDelete}/${currentUser._id}`,
+//         {
+//           method: 'DELETE',
+//         }
+//       );
+//       const data = await res.json();
+//       if (!res.ok) {
+//         console.log(data.message);
+//       } else {
+//         setUserProduct((prev) =>
+//           prev.filter((product) => product._id !== productIdToDelete)
+//         );
+//       }
+//     } catch (error) {
+//       console.log(error.message);
+//     }
+//   };
 
-  const handleSearch = (e) => {
-    setSearchTerm(e.target.value);
-  };
+//   const handleSearch = (e) => {
+//     setSearchTerm(e.target.value);
+//   };
 
-  const generatePDFReport = () => {
-    const content = `
-      <style>
-        table {
-          width: 100%;
-          border-collapse: collapse;
-        }
-        th, td {
-          padding: 8px;
-          text-align: left;
-          border-bottom: 1px solid #ddd;
-        }
-        th {
-          background-color: #f2f2f2;
-          font-size: 14px; /* Adjust font size */
-        }
-        td {
-          font-size: 12px; /* Adjust font size */
-        }
-      </style>
-      <h1><b>Product Details Report</b></h1>
-      <p>Total Products: ${totalProducts}</p>
-      <p>Last Month Products: ${lastMonthProducts}</p>
-      <br>
-      <br>
-      <table>
-        <thead>
-          <tr>
-            <th>Updated At</th>
-            <th>Title</th>
-            <th>Category</th>
-            <th>Unit Price</th>
-            <th>Quantity</th>
-          </tr>
-        </thead>
-        <tbody>
-          ${userProduct.map((product) => `
-            <tr>
-              <td>${new Date(product.createdAt).toLocaleDateString()}</td>
-              <td>${product.title}</td>
-              <td>${product.category}</td>
-              <td>${product.price}</td>
-              <td>${product.quantity}</td>
-            </tr>
-          `).join('')}
-        </tbody>
-      </table>
-    `;
+//   const generatePDFReport = () => {
+//     const content = `
+//       <style>
+//         table {
+//           width: 100%;
+//           border-collapse: collapse;
+//         }
+//         th, td {
+//           padding: 8px;
+//           text-align: left;
+//           border-bottom: 1px solid #ddd;
+//         }
+//         th {
+//           background-color: #f2f2f2;
+//           font-size: 14px; /* Adjust font size */
+//         }
+//         td {
+//           font-size: 12px; /* Adjust font size */
+//         }
+//       </style>
+//       <h1><b>Product Details Report</b></h1>
+//       <p>Total Products: ${totalProducts}</p>
+//       <p>Last Month Products: ${lastMonthProducts}</p>
+//       <br>
+//       <br>
+//       <table>
+//         <thead>
+//           <tr>
+//             <th>Updated At</th>
+//             <th>Title</th>
+//             <th>Category</th>
+//             <th>Unit Price</th>
+//             <th>Quantity</th>
+//           </tr>
+//         </thead>
+//         <tbody>
+//           ${userProduct.map((product) => `
+//             <tr>
+//               <td>${new Date(product.createdAt).toLocaleDateString()}</td>
+//               <td>${product.title}</td>
+//               <td>${product.category}</td>
+//               <td>${product.price}</td>
+//               <td>${product.quantity}</td>
+//             </tr>
+//           `).join('')}
+//         </tbody>
+//       </table>
+//     `;
 
-    html2pdf().from(content).set({ margin: 1, filename: 'product_report.pdf' }).save();
-  };
+//     html2pdf().from(content).set({ margin: 1, filename: 'product_report.pdf' }).save();
+//   };
 
-  const handleGenerateReport = () => {
-    generatePDFReport();
-  };
-
-  const handleAssignFeature = async (productId) => {
-    try {
-      const res = await fetch(`/api/products/featureproduct/${productId}/${currentUser._id}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-      const data = await res.json();
-      if (res.ok) {
-        setUserProduct((prev) =>
-          prev.map((product) =>
-            product._id === productId ? { ...product, isfeature: true } : product
-          )
-        );
-      } else {
-        console.log(data.message);
-      }
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
-
-  const handleReassignFeature = async (productId) => {
-    try {
-      const res = await fetch(`/api/products/unfeatureproduct/${productId}/${currentUser._id}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-      const data = await res.json();
-      if (res.ok) {
-        setUserProduct((prev) =>
-          prev.map((product) =>
-            product._id === productId ? { ...product, isfeature: false } : product
-          )
-        );
-      } else {
-        console.log(data.message);
-      }
-    } catch (error) {
-      console.log(error.message);
-    }
+//   const handleGenerateReport = () => {
+//     generatePDFReport();
+//   };
+const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    return date.toLocaleDateString(undefined, options);
   };
 
   return (
     <div className='mt-24 table-auto overflow-x-scroll md:mx-auto p-3 scrollbar scrollbar-track-slate-100 scrollbar-thumb-slate-300 dark:scrollbar-track-slate-700 dark:scrollbar-thumb-slate-500'>
       <section className="hero-section"></section>
       <div className='flex justify-between'>
-        <input
+        {/* <input
           type="text"
           placeholder="Search Products.."
           value={searchTerm}
           onChange={handleSearch}
           className="px-3 py-2 w-150 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 mr-2 h-10 dark:bg-slate-800 placeholder-gray-500"
-        />
+        /> */}
         <div></div>
         <Button
           gradientDuoTone='purpleToBlue'
           outline
-          onClick={handleGenerateReport}
+         
           className=""
         >
           Generate Report
@@ -187,7 +147,7 @@ export default function DashBookingRequests() {
           <div className='flex justify-between'>
             <div className=''>
               <h3 className='text-gray-500 text-md uppercase'>Total Requests</h3>
-              <p className='text-2xl'>{totalProducts}</p>
+              <p className='text-2xl'>{totalRequests}</p>
             </div>
             <HiGift className='bg-red-600 text-white rounded-full text-5xl p-3 shadow-lg' />
           </div>
@@ -198,13 +158,13 @@ export default function DashBookingRequests() {
               <h3 className='text-gray-500 text-md uppercase'>
                 Last Month Requests
               </h3>
-              <p className='text-2xl'>{lastMonthProducts}</p>
+              <p className='text-2xl'>{lastMonthRequests}</p>
             </div>
             <HiGift className='bg-lime-600 text-white rounded-full text-5xl p-3 shadow-lg' />
           </div>
         </div>
       </div>
-      {currentUser.isAdmin && userProduct.length > 0 ? (
+      {currentUser.isAdmin && requests.length > 0 ? (
         <>
           <Table hoverable className="shadow-md">
             <Table.Head>
@@ -212,62 +172,35 @@ export default function DashBookingRequests() {
               <Table.HeadCell>Name</Table.HeadCell>
               <Table.HeadCell>Email</Table.HeadCell>
               <Table.HeadCell>Phone</Table.HeadCell>
+              <Table.HeadCell>Address</Table.HeadCell>
               <Table.HeadCell>Service Type</Table.HeadCell>
               <Table.HeadCell>Date</Table.HeadCell>
-              <Table.HeadCell>Address</Table.HeadCell>
               <Table.HeadCell>Payment Method</Table.HeadCell>
               <Table.HeadCell>Action</Table.HeadCell>
             </Table.Head>
-            {userProduct.map((product) => (
-              <Table.Body className='divide-y' key={product._id}>
+            {requests.map((item) => (
+              <Table.Body className='divide-y' key={item._id}>
                 <Table.Row className='bg-white dark:border-gray-700 dark:bg-gray-800'>
-                  <Table.Cell>{new Date(product.updatedAt).toLocaleDateString()}</Table.Cell>
+                  <Table.Cell>{item.bookId}</Table.Cell>
+                  <Table.Cell>{item.name}</Table.Cell>
+                  <Table.Cell>{item.email}</Table.Cell>
+                  <Table.Cell>{item.phone}</Table.Cell>
+                  <Table.Cell>{item.address}, {item.city} <br /> {item.state} <br /> {item.zip}</Table.Cell>
+                  <Table.Cell>{item.serviceType}</Table.Cell>
+                  <Table.Cell>{formatDate(item.date)}</Table.Cell>
+                  <Table.Cell>{item.paymentMethod}</Table.Cell>
                   <Table.Cell>
-                    <Link to={`/product/${product.slug}`}>
-                      <img
-                        src={product.images[0]}
-                        alt={product.title}
-                        className="w-20 h-10 object-cover bg-gray-500"
-                      />
-                    </Link>
-                  </Table.Cell>
-                  <Table.Cell>
-                    <Link className='font-medium text-gray-900 dark:text-white' to={`/product/${product.slug}`}>
-                      {product.title}
-                    </Link>
-                  </Table.Cell>
-                  <Table.Cell>{product.category}</Table.Cell>
-                  <Table.Cell>
-                    <span className={product.quantity < 5 ? 'text-red-500' : 'text-green-500'}>
-                      {product.quantity < 5 ? 'Low Stock' : 'In Stock'}
-                    </span>
-                  </Table.Cell>
-                  <Table.Cell>
-                    {product.isfeature ? (
-                      <Button color='failure' onClick={() => handleReassignFeature(product._id)}>
-                        Reassign from Feature
-                      </Button>
-                    ) : (
-                      <Button color='success' onClick={() => handleAssignFeature(product._id)}>
-                        Assign as Feature
-                      </Button>
-                    )}
-                  </Table.Cell>
-                  <Table.Cell>
-                    <span className='font-medium text-red-500 hover:underline cursor-pointer'
+                    {/* <span className='font-medium text-red-500 hover:underline cursor-pointer'
                       onClick={() => {
                         setShowModel(true);
-                        setProductIdToDelete(product._id);
+                        setProductIdToDelete(item._id);
                       }}
                     >
                       Delete
-                    </span>
+                    </span> */}
                   </Table.Cell>
-                  <Table.Cell>
-                    <Link className='text-teal-500 hover:underline' to={`/update-product/${product._id}`}>
-                      <span>Edit</span>
-                    </Link>
-                  </Table.Cell>
+
+                  
                 </Table.Row>
               </Table.Body>
             ))}
@@ -283,14 +216,14 @@ export default function DashBookingRequests() {
             <HiOutlineExclamationCircle className="h-14 w-14 text-gray-400 dark:text-gray-200 mb-4 mx-auto" />
             <h3 className="mb-5 text-lg text-gray-500 dark:text-gray-200">Are you sure you want to Delete this Product</h3>
           </div>
-          <div className='flex justify-center gap-4'>
+          {/* <div className='flex justify-center gap-4'>
             <Button color='failure' onClick={handleDeleteProduct}>
               Yes, I am sure
             </Button>
             <Button color='gray' onClick={() => setShowModel(false)}>
               No, cancel
             </Button>
-          </div>
+          </div> */}
         </Modal.Body>
       </Modal>
     </div>
