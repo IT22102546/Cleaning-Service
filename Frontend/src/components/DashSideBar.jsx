@@ -1,6 +1,6 @@
 import { Sidebar } from "flowbite-react";
 import { useEffect, useState } from "react";
-import { HiArrowSmRight, HiGift, HiOutlineUserGroup, HiUser} from 'react-icons/hi';
+import { HiArrowSmRight, HiBookmark, HiBookmarkAlt, HiBriefcase, HiGift, HiOutlineUserGroup, HiUser} from 'react-icons/hi';
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import { signOut } from "../redux/user/userSlice";
@@ -67,7 +67,7 @@ export default function DashSideBar() {
               <Link to='/dashboard?tab=services' key="services">
                 <Sidebar.Item
                   active={tab === 'services'}
-                  icon={HiGift}
+                  icon={HiBriefcase}
                   as='div'
                 >
                   Services
@@ -77,10 +77,20 @@ export default function DashSideBar() {
               <Link to='/dashboard?tab=bookings' key="bookings">
                 <Sidebar.Item
                   active={tab === 'bookings'}
-                  icon={HiGift}
+                  icon={HiBookmarkAlt}
                   as='div'
                 >
                   Booking Requests
+                </Sidebar.Item>
+              </Link>
+
+              <Link to='/dashboard?tab=confirmbookings' key="bookings">
+                <Sidebar.Item
+                  active={tab === 'confirmbookings'}
+                  icon={HiBookmark}
+                  as='div'
+                >
+                  Accepted Bookings
                 </Sidebar.Item>
               </Link>
 

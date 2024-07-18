@@ -4,7 +4,7 @@ import { createBooking, deleteBooking, getBooking, updateBooking } from "../cont
 
 const router = express.Router()
 
-router.get('/get-booking/:id', verifyToken, getBooking)
+router.get('/get-bookings', getBooking)
 router.post('/create-book',createBooking);
 router.put("/update-book/:id" , verifyToken , updateBooking);
 router.delete("/delete-book/:id" , verifyToken , deleteBooking);
