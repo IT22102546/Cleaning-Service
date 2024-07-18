@@ -42,7 +42,7 @@ export default function App() {
           <Route path="/add-services" element={<AddProducts/>}/>
           <Route path="/update-product/:productId" element={<UpdateProducts/>}/>
           <Route path="/book-service" element={<BookingForm/>}/>
-          <Route path="/book-success" element={<BookSuccess/>}/>
+          <Route path="/success-book" element={<BookSuccess/>}/>
      <Route/>     
 
           <Route path="/dashboard" element={<DashBoard/>}/>
