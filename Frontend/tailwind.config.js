@@ -10,7 +10,7 @@ export default {
   theme: {
     extend: {
       colors: {
-        secondary: '#F97300',
+        secondary: '#698dd9',
       },
       fontFamily: {
         tangerine: ['Tangerine'],

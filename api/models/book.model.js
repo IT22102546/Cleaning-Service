@@ -1,6 +1,11 @@
 import mongoose from "mongoose";
 
 const bookingSchema = new mongoose.Schema({
+  bookId:{
+    type:String,
+    unique:true,
+  },
+
   name: {
     type: String,
     required: true,
@@ -9,20 +14,18 @@ const bookingSchema = new mongoose.Schema({
   email: {
     type: String,
     required: true,
-    unique:true,
     trim: true,
-    match: [/.+\@.+\..+/, 'Please fill a valid email address']
+    
   },
   phone: {
     type: String,
     required: true,
-    unique:true,
     trim: true
   },
   serviceType: {
     type: String,
     required: true,
-    enum: ['regular', 'deep', 'move-in-out']
+
   },
   date: {
     type: Date,
@@ -51,16 +54,18 @@ const bookingSchema = new mongoose.Schema({
   paymentMethod: {
     type: String,
     required: true,
-    enum: ['credit-card', 'paypal', 'cash']
+    
   },
   
   allergies: {
     type: String,
-    trim: true
+    trim: true,
+    default:"No any allergies"
   },
   additional: {
     type: String,
-    trim: true
+    trim: true,
+    default:"No any additional information"
   }
 }, { timestamps: true });
 
