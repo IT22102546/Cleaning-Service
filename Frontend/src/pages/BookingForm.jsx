@@ -1,26 +1,26 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Alert } from "flowbite-react";
-import { useSelector } from "react-redux";
 
 export default function BookingForm() {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
-  const [formData, setFormData] = useState();
+  const [formData, setFormData] = useState({
+    serviceType: 'regular',
+    payment: 'credit-card'
+  });
+
   const handleChange = (e) => {
-    setFormData({ ...formData, id:currentUser._id, [e.target.id]: e.target.value.trim() });
+    setFormData({ ...formData, [e.target.id]: e.target.value.trim() });
   };
-  const { currentUser } = useSelector((state) => state.user);
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // if (!formData.na || !formData.email || !formData.mobile || !formData.adress) {
-    //     return setError('Please Fill all Fields');
-    // }
+    setLoading(true);
+    setError(null);
 
     try {
-      setLoading(true);
-      setError(false);
       const res = await fetch("/api/book/create-book", {
         method: "POST",
         headers: {
@@ -32,38 +32,35 @@ export default function BookingForm() {
       const data = await res.json();
       console.log(data);
       setLoading(false);
-      if (data.success === false) {
+
+      if (!data.success) {
         setError(data.message);
         return;
       }
-      //navigate('/sign-in');
+
+      navigate('/success-book');
     } catch (error) {
       setLoading(false);
       setError(error.message);
     }
   };
+
   return (
     <div className="relative bg-white min-h-screen flex items-center justify-center">
       <div className="container mx-auto px-6 lg:px-8 py-12">
         <div className="flex flex-col lg:flex-row items-center mt-20">
           <section className="hero-section"></section>
 
-          {/* above code need to be copy in every page that you create */}
-          <div className="lg:w-1/2 text-center lg:text-left">
-            <div className="w-full p-10  shadow-md rounded-md">
-              <h2 className="text-2xl font-bold mb-6 text-secondary">
-                Book An Appointment
-              </h2>
-
+          <div className="lg:w-2/3 text-center lg:text-left">
+            <div className="w-full p-10 shadow-md rounded-md">
+              <h2 className="text-2xl font-bold mb-6 text-secondary">Book An Appointment</h2>
               
               <form onSubmit={handleSubmit}>
-                <div className="mx-auto flex flex-wrap gap-5 justify-center">
+                <div className="mx-auto flex flex-wrap gap-10 justify-center">
+
                   <div>
                     <div className="mb-4">
-                      <label htmlFor="name" className="block mb-2">
-                        {" "}
-                        Your Name{" "}
-                      </label>
+                      <label htmlFor="name" className="block mb-2">Your Name</label>
                       <input
                         type="text"
                         id="name"
@@ -74,10 +71,7 @@ export default function BookingForm() {
                     </div>
 
                     <div className="mb-4">
-                      <label htmlFor="email" className="block mb-2">
-                        {" "}
-                        Email{" "}
-                      </label>
+                      <label htmlFor="email" className="block mb-2">Email</label>
                       <input
                         type="email"
                         id="email"
@@ -88,10 +82,7 @@ export default function BookingForm() {
                     </div>
 
                     <div className="mb-4">
-                      <label htmlFor="phone" className="block mb-2">
-                        {" "}
-                        Phone Number{" "}
-                      </label>
+                      <label htmlFor="phone" className="block mb-2">Phone Number</label>
                       <input
                         type="tel"
                         id="phone"
@@ -102,27 +93,33 @@ export default function BookingForm() {
                     </div>
 
                     <div className="mb-4">
-                      <label htmlFor="serviceType" className="block mb-2">
-                        Type of Visit
-                      </label>
+                      <label htmlFor="serviceType" className="block mb-2">Type of Visit</label>
                       <select
                         id="serviceType"
                         className="appearance-none block w-full bg-orange-50 text-gray-700 border border-orange-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                         onChange={handleChange}
+                        defaultValue="regular"
                       >
-                        <option value="regular">Regular Cleaning</option>
-                        <option value="deep">Deep Cleaning</option>
-                        <option value="move-in-out">
-                          Move-In/Move-Out Cleaning
-                        </option>
+                        <option value="GeneralCommercialCleaning">General Commercial Cleaning</option>
+                        <option value="HighPresureWaterBlasting">High Presure Water Blasting</option>
+                        <option value="CarpetSteamCleaningandMaintains">Carpet Steam Cleaning and Maintains</option>
+                        <option value="BuildersCleaning">Builders Cleaning</option>
+                        <option value="BondCleaning">Bond Cleaning</option>
+                        <option value="HouseResidentalCleaning">House / Residental Cleaning</option>
+                        <option value="OfficeCleaning">Office Cleaning</option>
+                        <option value="WarehouseCleaning">Warehouse Cleaning</option>
+                        <option value="HospitalCleaning">Hospital Cleaning</option>
+                        <option value="SchoolCleaning">School Cleaning</option>
+                        <option value="NewlyConstructedCleaning">Newly Constructed Cleaning</option>
+                        <option value="GovernmentProjecCleaning">Government Projec Cleaning</option>
+                        <option value="HotelCleaning">Hotel Cleaning</option>
+                        <option value="RestaurentCleaning">Restaurent Cleaning</option>
+                        <option value="OfficeBoyandMaidService">Office Boy and Maid Service</option>
                       </select>
                     </div>
 
                     <div className="mb-4">
-                      <label htmlFor="date" className="block mb-2">
-                        {" "}
-                        Schedule Date{" "}
-                      </label>
+                      <label htmlFor="date" className="block mb-2">Schedule Date</label>
                       <input
                         type="date"
                         id="date"
@@ -132,9 +129,7 @@ export default function BookingForm() {
                     </div>
 
                     <div className="mb-4">
-                      <label htmlFor="address" className="block mb-2">
-                        Street Address
-                      </label>
+                      <label htmlFor="address" className="block mb-2">Street Address</label>
                       <input
                         type="text"
                         id="address"
@@ -145,10 +140,7 @@ export default function BookingForm() {
                     </div>
 
                     <div className="mb-4">
-                      <label htmlFor="city" className="block mb-2">
-                        {" "}
-                        City{" "}
-                      </label>
+                      <label htmlFor="city" className="block mb-2">City</label>
                       <input
                         type="text"
                         id="city"
@@ -161,10 +153,7 @@ export default function BookingForm() {
 
                   <div>
                     <div className="mb-4">
-                      <label htmlFor="state" className="block mb-2">
-                        {" "}
-                        State/Province{" "}
-                      </label>
+                      <label htmlFor="state" className="block mb-2">State/Province</label>
                       <input
                         type="text"
                         id="state"
@@ -175,10 +164,7 @@ export default function BookingForm() {
                     </div>
 
                     <div className="mb-4">
-                      <label htmlFor="zip" className="block mb-2">
-                        {" "}
-                        Zip/Postal Code{" "}
-                      </label>
+                      <label htmlFor="zip" className="block mb-2">Zip/Postal Code</label>
                       <input
                         type="text"
                         id="zip"
@@ -189,13 +175,12 @@ export default function BookingForm() {
                     </div>
 
                     <div className="mb-4">
-                      <label htmlFor="payment" className="block mb-2">
-                        Preferred Payment Method
-                      </label>
+                      <label htmlFor="payment" className="block mb-2">Preferred Payment Method</label>
                       <select
-                        id="payment"
+                        id="paymentMethod"
                         className="appearance-none block w-full bg-orange-50 text-gray-700 border border-orange-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                         onChange={handleChange}
+                        defaultValue="credit-card"
                       >
                         <option value="credit-card">Credit Card</option>
                         <option value="paypal">PayPal</option>
@@ -204,27 +189,26 @@ export default function BookingForm() {
                     </div>
 
                     <div className="mb-4">
-                      <label htmlFor="allergies" className="block mb-2">
-                        Any Allergies or Sensitivities
-                      </label>
+                      <label htmlFor="allergies" className="block mb-2">Any Allergies or Sensitivities</label>
                       <textarea
                         onChange={handleChange}
                         id="allergies"
                         className="appearance-none block w-full bg-orange-50 text-gray-700 border border-orange-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                        placeholder="Any allergies or sensitivities"
                       ></textarea>
                     </div>
 
                     <div className="mb-4">
-                      <label htmlFor="additional" className="block mb-2">
-                        Special Instructions or Requests
-                      </label>
-                      <textarea
+                      <label htmlFor="additional" className="block mb-2">Special Instructions or Requests</label>
+                      <textarea cols={40}
                         onChange={handleChange}
                         id="additional"
                         className="appearance-none block w-full bg-orange-50 text-gray-700 border border-orange-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                        placeholder="Any special instructions or requests"
                       ></textarea>
                     </div>
                   </div>
+
                 </div>
                 <button className="w-full p-3 bg-customYellow text-white font-bold rounded-md bg-secondary hover:bg-orange-500">
                   Schedule Now
@@ -232,19 +216,17 @@ export default function BookingForm() {
               </form>
             </div>
 
-            <div className="text-red-600">
-                        {error && (
-                            <Alert className="mt-5" color="failure">
-                                {error}
-                            </Alert>
-                        )}
-                    </div>
+            {error && (
+              <div className="text-red-600">
+                <Alert className="mt-5" color="failure">
+                  {error}
+                </Alert>
+              </div>
+            )}
 
-            <div className="mt-5 md:hidden">
+            {/* <div className="mt-5 md:hidden">
               <div className="p-4 bg-secondary text-white w-11/12 mx-auto rounded-md shadow-md">
-                <h1 className="text-lg mb-2">
-                  Appointment Confirmation Process
-                </h1>
+                <h1 className="text-lg mb-2">Appointment Confirmation Process</h1>
                 <p>
                   Once you submit your appointment request, it will be reviewed
                   by our service team. Upon approval, you will receive a
@@ -253,10 +235,10 @@ export default function BookingForm() {
                   cleaning needs. Thank you for choosing our services!
                 </p>
               </div>
-            </div>
+            </div> */}
           </div>
 
-          <div className="hidden md:block lg:w-1/2 mt-8 lg:mt-0 ">
+          <div className="hidden md:block lg:w-1/3 mt-8 lg:mt-0">
             <div className="relative">
               <div style={{ marginTop: "-55px" }}>
                 <img
@@ -267,9 +249,7 @@ export default function BookingForm() {
               </div>
               <div>
                 <div className="p-4 bg-secondary text-white w-11/12 mx-auto rounded-md shadow-md">
-                  <h1 className="text-lg mb-2">
-                    Appointment Confirmation Process
-                  </h1>
+                  <h1 className="text-lg mb-2">Appointment Confirmation Process</h1>
                   <p>
                     Once you submit your appointment request, it will be
                     reviewed by our service team. Upon approval, you will
