@@ -28,7 +28,7 @@ export default function Header() {
     const handleScroll = () => {
       const heroSectionHeight = document.querySelector('.hero-section').offsetHeight;
       if (window.scrollY > heroSectionHeight) {
-        setHeaderClass('bg-orange-500 shadow-md text-white');
+        setHeaderClass('bg-blue-500 shadow-md text-white');
       } else {
         setHeaderClass('bg-transparent border-none');
       }
@@ -130,7 +130,7 @@ export default function Header() {
       <div className="container mx-auto flex flex-wrap items-center justify-between py-4">
         <div className="flex items-center">
           <NavLink to="/" className="self-center whitespace-nowrap text-3xl font-semibold font-tangerine ml-0 md:ml-16">
-            <span className="text-5xl font-bold text-secondary">!W</span>acky
+            <span className="text-5xl font-bold text-white"></span>
           </NavLink>
         </div>
 
@@ -138,7 +138,7 @@ export default function Header() {
           <NavLink 
             to="/" 
             className={({ isActive }) => 
-              isActive ? "text-yellow-300" : "text-black"
+              isActive ? "text-white-300" : "text-black"
             }
           >
             Home
@@ -146,7 +146,7 @@ export default function Header() {
           <NavLink 
             to="/category" 
             className={({ isActive }) => 
-              isActive ? "text-yellow-300" : "text-black"
+              isActive ? "text-white" : "text-black"
             }
           >
             Categories
@@ -154,7 +154,7 @@ export default function Header() {
           <NavLink 
              to="/product-page" 
             className={({ isActive }) => 
-              isActive ? "text-yellow-300" : "text-black"
+              isActive ? "text-white" : "text-black"
             }
           >
             Services
@@ -162,7 +162,7 @@ export default function Header() {
           <NavLink 
             to="/blogs" 
             className={({ isActive }) => 
-              isActive ? "text-yellow-300" : "text-black"
+              isActive ? "text-white" : "text-black"
             }
           >
             Blogs
