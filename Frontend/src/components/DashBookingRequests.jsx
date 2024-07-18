@@ -190,14 +190,18 @@ const formatDate = (dateString) => {
                   <Table.Cell>{formatDate(item.date)}</Table.Cell>
                   <Table.Cell>{item.paymentMethod}</Table.Cell>
                   <Table.Cell>
-                    {/* <span className='font-medium text-red-500 hover:underline cursor-pointer'
-                      onClick={() => {
-                        setShowModel(true);
-                        setProductIdToDelete(item._id);
-                      }}
-                    >
-                      Delete
-                    </span> */}
+                    <div className="flex flex-row justify-center">
+                        <Link>
+                            <box-icon name='check-circle' color="green"></box-icon>
+                        </Link>
+                        <Link>
+                            <box-icon name='edit-alt' color="orange"></box-icon>
+                        </Link>
+                        <Link>
+                            <box-icon name='x-circle' color="red"></box-icon>
+                        </Link>
+                        
+                    </div>
                   </Table.Cell>
 
                   
