@@ -35,32 +35,32 @@ export default function Home() {
               </Link>
             </div>
             <div className="flex justify-center lg:justify-start items-center space-x-4 mt-10">
-              <div className="flex items-center flex-wrap gap-10">
+              <div className=" flex md:flex items-center md:gap-16 gap-10 mx-auto">
                 <div>
-                  <div className="flex flex-wrap">
+                  <div className="flex-row md:flex mx-auto">
                     <span className="material-icons "><box-icon name='phone-call' type='solid' size='md' color='#2B0996' ></box-icon></span>
                     <div>
-                      <span className="text-gray-800 ml-2"> Call us</span><br />
+                      <span className="text-gray-800 ml-2 font-semibold"> Call us</span><br />
                       <span href="tel:+01234567890" className="text-gray-800 ml-2">011 456 7890</span>
                     </div>
                   </div>
                 </div>
 
                 <div>
-                  <div className="flex flex-wrap">
+                  <div className="flex-row md:flex">
                     <span className="material-icons text-orange-500"><box-icon name='envelope' size='md' color='#2B0996'></box-icon></span>
                     <div>
-                      <span className="text-gray-800 ml-2"> Email</span><br />
+                      <span className="text-gray-800 ml-2 font-semibold"> Email</span><br />
                       <span href="tel:+01234567890" className="text-gray-800 ml-2">info@email.com</span>
                     </div>
                   </div>
                 </div>
 
                 <div>
-                  <div className="flex flex-wrap">
+                  <div className="flex-row md:flex">
                     <span className="material-icons text-orange-500"><box-icon name='location-plus' type='solid' size='md' color='#2B0996' ></box-icon></span>
                     <div>
-                      <span className="text-gray-800 ml-2"> Location</span><br />
+                      <span className="text-gray-800 ml-2 font-semibold"> Location</span><br />
                       <span href="tel:+01234567890" className="text-gray-800 ml-2">location ek dnn oneee...</span>
                     </div>
                   </div>
