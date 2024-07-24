@@ -29,7 +29,7 @@ export default function Home() {
             <div className="flex justify-center lg:justify-start mb-4">
               <Link to="/book-service">
               
-              <button className="bg-orange-500 text-white px-6 py-2 rounded-md hover:bg-orange-600 transition">
+              <button className="bg-secondary text-white px-6 py-2 rounded-md hover:bg-blue-600 transition">
                 Book Now
               </button>
               </Link>
@@ -38,7 +38,7 @@ export default function Home() {
               <div className="flex items-center flex-wrap gap-10">
                 <div>
                   <div className="flex flex-wrap">
-                    <span className="material-icons text-orange-500"><box-icon name='phone-call' type='solid' size='md' color='#FF7D29' ></box-icon></span>
+                    <span className="material-icons "><box-icon name='phone-call' type='solid' size='md' color='#2B0996' ></box-icon></span>
                     <div>
                       <span className="text-gray-800 ml-2"> Call us</span><br />
                       <span href="tel:+01234567890" className="text-gray-800 ml-2">011 456 7890</span>
@@ -48,7 +48,7 @@ export default function Home() {
 
                 <div>
                   <div className="flex flex-wrap">
-                    <span className="material-icons text-orange-500"><box-icon name='envelope' size='md' color='#FF7D29'></box-icon></span>
+                    <span className="material-icons text-orange-500"><box-icon name='envelope' size='md' color='#2B0996'></box-icon></span>
                     <div>
                       <span className="text-gray-800 ml-2"> Email</span><br />
                       <span href="tel:+01234567890" className="text-gray-800 ml-2">info@email.com</span>
@@ -58,7 +58,7 @@ export default function Home() {
 
                 <div>
                   <div className="flex flex-wrap">
-                    <span className="material-icons text-orange-500"><box-icon name='location-plus' type='solid' size='md' color='#FF7D29' ></box-icon></span>
+                    <span className="material-icons text-orange-500"><box-icon name='location-plus' type='solid' size='md' color='#2B0996' ></box-icon></span>
                     <div>
                       <span className="text-gray-800 ml-2"> Location</span><br />
                       <span href="tel:+01234567890" className="text-gray-800 ml-2">location ek dnn oneee...</span>
@@ -76,10 +76,10 @@ export default function Home() {
                 <img src="/images/cleaner.png" alt="Cleaner" className="mx-auto lg:mx-0 self-center justify-center" />
               </div>
               <div className="absolute top-0 right-0 mt-10 mr-4">
-                <div className="bg-yellow-200 p-2 rounded-full shadow-md">
-                  <img src="/images/facebook.png" alt="Facebook" className="w-4 h-4" />
+                <div className="bg-secondary p-2 rounded-full shadow-md hover:bg-blue-900 transition hover:cursor-pointer">
+                  <img src="/images/facebook.png" alt="Facebook" className="w-4 h-4 mx-auto" />
                 </div>
-                <div className="bg-yellow-200 p-2 rounded-full shadow-md mt-2">
+                <div className="bg-secondary p-2 rounded-full shadow-md mt-2 hover:bg-blue-900 transition hover:cursor-pointer">
                   <img src="/images/instagram.png" alt="Instagram" className="w-4 h-4" />
                 </div>
               </div>
@@ -88,19 +88,19 @@ export default function Home() {
         </div>
 
         <div className="flex justify-center space-x-4">
-          <div className="bg-yellow-200 p-2 rounded-full shadow-md mt-2">
+          <div className="bg-secondary p-2 rounded-full shadow-md mt-2">
 
             <img src="/images/hero-1.jpg" alt="Customer 1" className="w-14 h-14 rounded-full shadow-md" />
           </div>
-          <div className="bg-yellow-200 p-2 rounded-full shadow-md mt-2">
+          <div className="bg-secondary p-2 rounded-full shadow-md mt-2">
             
             <img src="/images/hero-2.jpg" alt="Customer 2" className="w-14 h-14 rounded-full shadow-md" />
           </div>
-          <div className="bg-yellow-200 p-2 rounded-full shadow-md mt-2">
+          <div className="bg-secondary p-2 rounded-full shadow-md mt-2">
             
             <img src="/images/hero-3.jpg" alt="Customer 3" className="w-14 h-14 rounded-full shadow-md" />
           </div>
-          <div className="bg-yellow-200 p-2 rounded-full shadow-md mt-2">
+          <div className="bg-secondary p-2 rounded-full shadow-md mt-2">
             
             <img src="/images/hero-4.jpg" alt="Customer 4" className="w-14 h-14 rounded-full shadow-md" />
           </div>
@@ -116,10 +116,10 @@ export default function Home() {
               />
             </div>
             <div className="w-full md:w-1/2 lg:w-3/5">
-              <span className="block uppercase text-orange-500 font-sans mb-2">
+              <span className="block uppercase text-secondary font-sans mb-2">
                 Welcome to the best cleaning service in Sri Lanka
               </span>
-              <h1 className="text-4xl font-bold text-gray-800 mb-4">
+              <h1 className="text-4xl font-bold text-secondary mb-4">
                 Cleaning Services (Pvt) Ltd
               </h1>
               <p className="text-gray-700 mb-4">
@@ -136,7 +136,7 @@ export default function Home() {
 
           <div className="container mx-auto p-4 mt-20">
             <div className="text-center my-8">
-              <h1 className="text-3xl font-bold mb-4 text-orange-400">OUR SERVICES</h1>
+              <h1 className="text-3xl font-bold mb-4 text-secondary">OUR SERVICES</h1>
               <p className="text-gray-700">
                 We assure in providing quality and excellence cleaning services and related services to keep the clients’ premises clean and healthy. We provide quality chemicals, equipment, and high-tech machines with well-trained employees to execute our services to high standards.
               </p>
