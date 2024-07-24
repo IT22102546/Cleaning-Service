@@ -64,7 +64,7 @@ export default function BookingForm() {
                       <input
                         type="text"
                         id="name"
-                        className="appearance-none block w-full bg-orange-50 text-gray-700 border border-orange-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                        className="appearance-none block w-full bg-blue-50 text-gray-700 border border-secondary rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                         placeholder="Jane"
                         onChange={handleChange}
                       />
@@ -75,7 +75,7 @@ export default function BookingForm() {
                       <input
                         type="email"
                         id="email"
-                        className="appearance-none block w-full bg-orange-50 text-gray-700 border border-orange-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                        className="appearance-none block w-full bg-blue-50 text-gray-700 border border-secondary rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                         placeholder="jane@example.com"
                         onChange={handleChange}
                       />
@@ -86,7 +86,7 @@ export default function BookingForm() {
                       <input
                         type="tel"
                         id="phone"
-                        className="appearance-none block w-full bg-orange-50 text-gray-700 border border-orange-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                        className="appearance-none block w-full bg-blue-50 text-gray-700 border border-secondary rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                         placeholder="123-456-7890"
                         onChange={handleChange}
                       />
@@ -96,7 +96,7 @@ export default function BookingForm() {
                       <label htmlFor="serviceType" className="block mb-2">Type of Visit</label>
                       <select
                         id="serviceType"
-                        className="appearance-none block w-full bg-orange-50 text-gray-700 border border-orange-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                        className="appearance-none block w-full bg-blue-50 text-gray-700 border border-secondary rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                         onChange={handleChange}
                         defaultValue="regular"
                       >
@@ -123,7 +123,7 @@ export default function BookingForm() {
                       <input
                         type="date"
                         id="date"
-                        className="appearance-none block w-full bg-orange-50 text-gray-700 border border-orange-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                        className="appearance-none block w-full bg-blue-50 text-gray-700 border border-secondary rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                         onChange={handleChange}
                       />
                     </div>
@@ -133,7 +133,7 @@ export default function BookingForm() {
                       <input
                         type="text"
                         id="address"
-                        className="appearance-none block w-full bg-orange-50 text-gray-700 border border-orange-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                        className="appearance-none block w-full bg-blue-50 text-gray-700 border border-secondary rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                         placeholder="123 Main St"
                         onChange={handleChange}
                       />
@@ -144,7 +144,7 @@ export default function BookingForm() {
                       <input
                         type="text"
                         id="city"
-                        className="appearance-none block w-full bg-orange-50 text-gray-700 border border-orange-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                        className="appearance-none block w-full bg-blue-50 text-gray-700 border border-secondary rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                         placeholder="Colombo"
                         onChange={handleChange}
                       />
@@ -157,7 +157,7 @@ export default function BookingForm() {
                       <input
                         type="text"
                         id="state"
-                        className="appearance-none block w-full bg-orange-50 text-gray-700 border border-orange-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                        className="appearance-none block w-full bg-blue-50 text-gray-700 border border-secondary rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                         placeholder="Western"
                         onChange={handleChange}
                       />
@@ -168,7 +168,7 @@ export default function BookingForm() {
                       <input
                         type="text"
                         id="zip"
-                        className="appearance-none block w-full bg-orange-50 text-gray-700 border border-orange-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                        className="appearance-none block w-full bg-blue-50 text-gray-700 border border-secondary rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                         placeholder="12345"
                         onChange={handleChange}
                       />
@@ -178,7 +178,7 @@ export default function BookingForm() {
                       <label htmlFor="payment" className="block mb-2">Preferred Payment Method</label>
                       <select
                         id="paymentMethod"
-                        className="appearance-none block w-full bg-orange-50 text-gray-700 border border-orange-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                        className="appearance-none block w-full bg-blue-50 text-gray-700 border border-secondary rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                         onChange={handleChange}
                         defaultValue="credit-card"
                       >
@@ -193,7 +193,7 @@ export default function BookingForm() {
                       <textarea
                         onChange={handleChange}
                         id="allergies"
-                        className="appearance-none block w-full bg-orange-50 text-gray-700 border border-orange-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                        className="appearance-none block w-full bg-blue-50 text-gray-700 border border-secondary rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                         placeholder="Any allergies or sensitivities"
                       ></textarea>
                     </div>
@@ -203,14 +203,14 @@ export default function BookingForm() {
                       <textarea cols={40}
                         onChange={handleChange}
                         id="additional"
-                        className="appearance-none block w-full bg-orange-50 text-gray-700 border border-orange-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                        className="appearance-none block w-full bg-blue-50 text-gray-700 border border-secondary rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                         placeholder="Any special instructions or requests"
                       ></textarea>
                     </div>
                   </div>
 
                 </div>
-                <button className="w-full p-3 bg-customYellow text-white font-bold rounded-md bg-secondary hover:bg-orange-500">
+                <button className="w-full p-3 bg-customYellow text-white font-bold rounded-md bg-secondary hover:bg-blue-800 transition ease-in">
                   Schedule Now
                 </button>
               </form>
@@ -224,19 +224,19 @@ export default function BookingForm() {
               </div>
             )}
 
-            {/* <div className="mt-5 md:hidden">
-              <div className="p-4 bg-secondary text-white w-11/12 mx-auto rounded-md shadow-md">
-                <h1 className="text-lg mb-2">Appointment Confirmation Process</h1>
-                <p>
-                  Once you submit your appointment request, it will be reviewed
-                  by our service team. Upon approval, you will receive a
-                  confirmation with the scheduled date and time. Our service
-                  provider will arrive at the specified time to fulfill your
-                  cleaning needs. Thank you for choosing our services!
-                </p>
-              </div>
-            </div> */}
           </div>
+
+          <div className="md:hidden p-4 bg-secondary text-white w-11/12 mx-auto rounded-md shadow-md">
+                  <h1 className="text-lg mb-2">Appointment Confirmation Process</h1>
+                  <p>
+                    Once you submit your appointment request, it will be
+                    reviewed by our service team. Upon approval, you will
+                    receive a confirmation with the scheduled date and time. Our
+                    service provider will arrive at the specified time to
+                    fulfill your cleaning needs. Thank you for choosing our
+                    services!
+                  </p>
+                </div>
 
           <div className="hidden md:block lg:w-1/3 mt-8 lg:mt-0">
             <div className="relative">
@@ -261,14 +261,14 @@ export default function BookingForm() {
                 </div>
               </div>
               <div className="absolute top-0 right-10 mt-10 mr-4">
-                <div className="bg-yellow-200 p-2 rounded-full shadow-md">
+                <div className="bg-secondary p-2 rounded-full shadow-md">
                   <img
                     src="/images/facebook.png"
                     alt="Facebook"
                     className="w-4 h-4"
                   />
                 </div>
-                <div className="bg-yellow-200 p-2 rounded-full shadow-md mt-2">
+                <div className="bg-secondary p-2 rounded-full shadow-md mt-2">
                   <img
                     src="/images/instagram.png"
                     alt="Instagram"
@@ -278,6 +278,7 @@ export default function BookingForm() {
               </div>
             </div>
           </div>
+
         </div>
 
         <br />
