@@ -102,9 +102,9 @@ export default function PostProduct() {
                       key={index}
                       src={image}
                       alt={`Product Image ${index + 1}`}
-                      className={`cursor-pointer ${
+                      className={`hidden md:block cursor-pointer h-56 w-full object-cover ${
                         index === mainImageIndex
-                          ? "border-4 border-orange-500"
+                          ? "border-4 border-secondary"
                           : "border"
                       }`}
                       onClick={() => setMainImageIndex(index)}
@@ -115,49 +115,21 @@ export default function PostProduct() {
                 <img
                   src={product.images[mainImageIndex]}
                   alt={product.title}
-                  className="w-full h-82 object-cover"
+                  className="w-full h-72 object-cover"
                 />
                 <h1 className="text-3xl my-7 font-semibold">{product.title}</h1>
                 <p>{product.description}</p>
                 <div className="flex flex-col gap-4 sm:flex-row justify-between mt-4">
                   <span>Price: Rs. {product.price}</span>
-                  <span>Available Quantity: {product.quantity}</span>
+                  
                 </div>
                 <div className="flex items-center mt-4 gap-2">
-                  <Button
-                    className="bg-slate-400"
-                    onClick={() => handleQuantityChange(-1)}
-                  >
-                    <FaMinus />
-                  </Button>
-                  <TextInput
-                    type="number"
-                    value={quantity}
-                    min="1"
-                    onChange={(e) =>
-                      setQuantity(Math.max(1, parseInt(e.target.value)))
-                    }
-                    className="w-16 text-center"
-                  />
-                  <Button
-                    className="bg-slate-400"
-                    onClick={() => handleQuantityChange(1)}
-                  >
-                    <FaPlus />
-                  </Button>
+                  
                 </div>
-                <div className="flex justify-center gap-4 mt-4">
-                  <button
-                    className="block w-full text-center py-2 mt-2 bg-slate-200 border border-slate-200 text-black hover:bg-slate-400 rounded hover:border-slate-300 hover:text-white hover:font-semibold"
-                    onClick={handleAddToCart}
-                  >
-                    Add to Cart
-                  </button>
                   <Link to='/book-service'>
-                    <Button className="bg-slate-400">Buy Product</Button>
+                    <Button className="bg-secondary w-full py-2 text-xl">Book this Service</Button>
                   </Link>
 
-                </div>
               </div>
             </div>
             <div className="mt-10">

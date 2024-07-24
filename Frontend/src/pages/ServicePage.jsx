@@ -60,18 +60,18 @@ export default function ProductPage() {
             <div className="flex">
               <aside className="w-1/4 p-4">
                 <div className="mb-6">
-                  <h2 className="text-lg font-bold mb-4">Categories</h2>
+                  <h2 className="text-lg font-bold mb-4 text-secondary">Categories</h2>
                   <ul>
                     {[
-                      "BedRoomFurniture",
-                      "LivingRoomFurniture",
-                      "DinningRoomFurniture",
-                      "SofaSets",
+                      "CommercialCleaning",
+                      "BondCleaning",
+                      "HighPressureWaterCleaning",
+                      "HospitalCleaning",
                     ].map((category) => (
                       <li
                         key={category}
                         onClick={() => handleCategoryChange(category)}
-                        className={`cursor-pointer mb-2 ${
+                        className={`cursor-pointer mb-2 font-sans ${
                           selectedCategory === category ? "bg-gray-200" : ""
                         }`}
                       >
@@ -81,7 +81,7 @@ export default function ProductPage() {
                   </ul>
                 </div>
                 <div>
-                  <h2 className="text-lg font-bold mb-4">Price Range</h2>
+                  <h2 className="text-lg font-bold mb-4 text-secondary">Price Range</h2>
                   <ul>
                     {[
                       "3000-5000",
@@ -115,6 +115,7 @@ export default function ProductPage() {
                     Total Products: {totalProducts}
                   </span>
                 </div>
+
                 <div className="grid grid-cols-3 gap-4">
                   {products.map((product) => (
                     <div
@@ -134,19 +135,12 @@ export default function ProductPage() {
                         </Link>
                       </h3>
                       <p className="text-gray-600">{product.category}</p>
-                      <p
-                        className={
-                          product.quantity < 5
-                            ? "text-red-500"
-                            : "text-green-500"
-                        }
-                      >
-                        {product.quantity < 5 ? "Low Stock" : "In Stock"}
-                      </p>
-                      <p className="text-xl font-bold">Rs. {product.price}</p>
+                      
+                      <p className="text-xl font-bold">Rs. {product.price}.00</p>
                     </div>
                   ))}
                 </div>
+                  
                 <div className="flex justify-center mt-6">
                   <button
                     onClick={() => handlePageChange(currentPage - 1)}
