@@ -4,13 +4,13 @@ const ContactForm = () => {
   return (
     <div className="container mx-auto p-4 mt-10 flex flex-wrap lg:flex-nowrap justify-between items-start gap-10">
       <div className="w-full lg:w-1/2">
-        <h2 className="text-3xl font-bold mb-4 text-orange-500 mx-auto">Get In Touch With Us</h2>
+        <h2 className="text-3xl font-bold mb-4 text-secondary mx-auto">Get In Touch With Us</h2>
         <p className="text-gray-700 mb-6">
         Whether you have a question about our services, need assistance or just want to talk, we want to hear from you. Get in touch with us and we'll respond as soon as possible.
         </p>
         <div className="space-y-4">
           <div className="flex items-center space-x-4">
-            <div className="bg-orange-500 p-3 rounded-full hover:bg-orange-600">
+            <div className="bg-secondary p-3 rounded-full hover:bg-blue-800 tra">
               <box-icon name="home" color="white"></box-icon>
             </div>
             <div>
@@ -19,7 +19,7 @@ const ContactForm = () => {
             </div>
           </div>
           <div className="flex items-center space-x-4">
-            <div className="bg-orange-500 p-3 rounded-full hover:bg-orange-600">
+            <div className="bg-secondary p-3 rounded-full hover:bg-blue-800">
               <box-icon name="phone" color="white"></box-icon>
             </div>
             <div>
@@ -28,7 +28,7 @@ const ContactForm = () => {
             </div>
           </div>
           <div className="flex items-center space-x-4">
-            <div className="bg-orange-500 p-3 rounded-full hover:bg-orange-600">
+            <div className="bg-secondary p-3 rounded-full hover:bg-blue-800">
               <box-icon name="envelope" color="white"></box-icon>
             </div>
             <div>
@@ -71,7 +71,7 @@ const ContactForm = () => {
           </div>
           <button
             type="submit"
-            className="w-full p-3 bg--500 text-white rounded-lg hover:bg-orange-500 transition bg-secondary"
+            className="w-full p-3 bg--500 text-white rounded-lg hover:bg-blue-800 transition bg-secondary"
           >
             Send Message
           </button>

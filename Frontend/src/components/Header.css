@@ -1,0 +1,21 @@
+.nav-item {
+    position: relative;
+    display: inline-block;
+    padding-bottom: 5px; /* Adjust the spacing between the text and the underline */
+  }
+  
+  .nav-item::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px; /* Thickness of the underline */
+    left: 0;
+    bottom: 0;
+    background-color: #006AFF; /* Inherits the text color */
+    transition: width 0.3s ease; /* Animation duration and easing */
+  }
+  
+  .nav-item-active::after {
+    width: 100%; /* Full width underline when active */
+  }
+  

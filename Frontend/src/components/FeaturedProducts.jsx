@@ -40,7 +40,7 @@ export default function FeaturedProducts() {
         <div className="bg-slate-200 py-16 w-full" style={{backgroundColor:"white"}}>
             <div className="w-full px-4">
             <div className="text-center my-8">
-                <h1 className="text-3xl font-bold mb-4 text-orange-400">FEATURED SERVICES</h1>
+                <h1 className="text-3xl font-bold mb-4 text-secondary">FEATURED SERVICES</h1>
                     <p className="text-md text-gray-600 max-w-md">
                        
                     </p>
