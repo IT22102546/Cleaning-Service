@@ -6,6 +6,7 @@ import mongoose from "mongoose";
 import authRoute from "./routes/auth.route.js";
 import userRoute from "./routes/user.route.js";
 import serviceRoute from "./routes/services.route.js";
+import bookService from "./routes/book.route.js";
 
 dotenv.config();
 
@@ -31,6 +32,7 @@ app.use(cors(corsOptions));
 app.use("/api/auth",authRoute);
 app.use("/api/user",userRoute); 
 app.use("/api/products",serviceRoute);
+app.use("/api/book",bookService);
 
 app.use((err,req,res,next)=>{
     const statusCode = err.statusCode || 500;

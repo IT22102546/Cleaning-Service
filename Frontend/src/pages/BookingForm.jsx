@@ -37,8 +37,8 @@ export default function BookingForm() {
         setError(data.message);
         return;
       }
-
       navigate('/success-book');
+      
     } catch (error) {
       setLoading(false);
       setError(error.message);

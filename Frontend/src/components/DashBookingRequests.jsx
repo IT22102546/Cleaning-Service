@@ -10,7 +10,7 @@ export default function DashBookingRequests() {
   const { currentUser } = useSelector((state) => state.user);
   const [requests, setRequests] = useState([]);
   const [showModel, setShowModel] = useState(false);
-  const [productIdToDelete, setProductIdToDelete] = useState('');
+  const [bookIdToDelete, setBookIdToDelete] = useState('');
   const [totalRequests, setTotalRequests] = useState(0);
   const [lastMonthRequests, setlastMonthRequests] = useState(0);
   //const [searchTerm, setSearchTerm] = useState('');
@@ -33,27 +33,27 @@ export default function DashBookingRequests() {
     fetchRequests();
   }, [data]);
 
-//   const handleDeleteProduct = async () => {
-//     setShowModel(false);
-//     try {
-//       const res = await fetch(
-//         `/api/products/deleteproduct/${productIdToDelete}/${currentUser._id}`,
-//         {
-//           method: 'DELETE',
-//         }
-//       );
-//       const data = await res.json();
-//       if (!res.ok) {
-//         console.log(data.message);
-//       } else {
-//         setUserProduct((prev) =>
-//           prev.filter((product) => product._id !== productIdToDelete)
-//         );
-//       }
-//     } catch (error) {
-//       console.log(error.message);
-//     }
-//   };
+  const handleDeleteBooking = async () => {
+    setShowModel(false);
+    try {
+      const res = await fetch(
+        `/api/products/deleteproduct/${bookIdToDelete}/${currentUser._id}`,
+        {
+          method: 'DELETE',
+        }
+      );
+      const data = await res.json();
+      if (!res.ok) {
+        console.log(data.message);
+      } else {
+        setRequests((prev) =>
+          prev.filter((product) => product._id !== bookIdToDelete)
+        );
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 
 //   const handleSearch = (e) => {
 //     setSearchTerm(e.target.value);
@@ -191,13 +191,16 @@ const formatDate = (dateString) => {
                   <Table.Cell>{item.paymentMethod}</Table.Cell>
                   <Table.Cell>
                     <div className="flex flex-row justify-center">
-                        <Link>
+                        <Link >
                             <box-icon name='check-circle' color="green"></box-icon>
                         </Link>
                         <Link>
                             <box-icon name='edit-alt' color="orange"></box-icon>
                         </Link>
-                        <Link>
+                        <Link onClick={() => {
+                        setShowModel(true);
+                        setBookIdToDelete(item._id);
+                      }}>
                             <box-icon name='x-circle' color="red"></box-icon>
                         </Link>
                         
@@ -218,16 +221,16 @@ const formatDate = (dateString) => {
         <Modal.Body>
           <div className="text-center">
             <HiOutlineExclamationCircle className="h-14 w-14 text-gray-400 dark:text-gray-200 mb-4 mx-auto" />
-            <h3 className="mb-5 text-lg text-gray-500 dark:text-gray-200">Are you sure you want to Delete this Product</h3>
+            <h3 className="mb-5 text-lg text-gray-500 dark:text-gray-200">Are you sure you want to Delete this Booking</h3>
           </div>
-          {/* <div className='flex justify-center gap-4'>
-            <Button color='failure' onClick={handleDeleteProduct}>
+          <div className='flex justify-center gap-4'>
+            <Button color='failure' onClick={handleDeleteBooking}>
               Yes, I am sure
             </Button>
             <Button color='gray' onClick={() => setShowModel(false)}>
               No, cancel
             </Button>
-          </div> */}
+          </div>
         </Modal.Body>
       </Modal>
     </div>
