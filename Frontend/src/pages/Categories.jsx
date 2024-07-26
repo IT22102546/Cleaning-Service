@@ -1,74 +1,95 @@
-import React from "react";
+import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 export default function Categories() {
+  const [generalCommercialCleaning, setGeneralCommercialCleaning] = useState([]);
+  const [highPressureWaterBlasting, setHighPressureWaterBlasting] = useState([]);
+  const [carpetSteamCleaningAndMaintains, setCarpetSteamCleaningAndMaintains] = useState([]);
+  const [buildersCleaning, setBuildersCleaning] = useState([]);
+  const [bondCleaning, setBondCleaning] = useState([]);
+  const [houseResidentialCleaning, setHouseResidentialCleaning] = useState([]);
+  const [officeCleaning, setOfficeCleaning] = useState([]);
+  const [warehouseCleaning, setWarehouseCleaning] = useState([]);
+  const [hospitalCleaning, setHospitalCleaning] = useState([]);
+  const [schoolCleaning, setSchoolCleaning] = useState([]);
+  const [newlyConstructedCleaning, setNewlyConstructedCleaning] = useState([]);
+  const [governmentProjectCleaning, setGovernmentProjectCleaning] = useState([]);
+  const [hotelCleaning, setHotelCleaning] = useState([]);
+  const [restaurantCleaning, setRestaurantCleaning] = useState([]);
+  const [officeBoyAndMaidService, setOfficeBoyAndMaidService] = useState([]);
+
+  useEffect(() => {
+    const fetchProductsByCategory = async (category, setState) => {
+      try {
+        const response = await fetch(`/api/products/category?category=${category}`);
+        const data = await response.json();
+        setState(data.products);
+      } catch (error) {
+        console.error(`Error fetching ${category} products`, error);
+      }
+    };
+
+    fetchProductsByCategory('GeneralCommercialCleaning', setGeneralCommercialCleaning);
+    fetchProductsByCategory('HighPressureWaterBlasting', setHighPressureWaterBlasting);
+    fetchProductsByCategory('CarpetSteamCleaningAndMaintains', setCarpetSteamCleaningAndMaintains);
+    fetchProductsByCategory('BuildersCleaning', setBuildersCleaning);
+    fetchProductsByCategory('BondCleaning', setBondCleaning);
+    fetchProductsByCategory('HouseResidentialCleaning', setHouseResidentialCleaning);
+    fetchProductsByCategory('OfficeCleaning', setOfficeCleaning);
+    fetchProductsByCategory('WarehouseCleaning', setWarehouseCleaning);
+    fetchProductsByCategory('HospitalCleaning', setHospitalCleaning);
+    fetchProductsByCategory('SchoolCleaning', setSchoolCleaning);
+    fetchProductsByCategory('NewlyConstructedCleaning', setNewlyConstructedCleaning);
+    fetchProductsByCategory('GovernmentProjectCleaning', setGovernmentProjectCleaning);
+    fetchProductsByCategory('HotelCleaning', setHotelCleaning);
+    fetchProductsByCategory('RestaurantCleaning', setRestaurantCleaning);
+    fetchProductsByCategory('OfficeBoyAndMaidService', setOfficeBoyAndMaidService);
+  }, []);
+
   return (
     <div className="relative bg-white min-h-screen flex items-center justify-center">
       <div className="container mx-auto px-6 lg:px-8 py-12">
-      <div className="flex flex-col lg:flex-row items-center mt-20">
-        <section className="hero-section"></section>
-          <div className="lg:w-1/2 text-center lg:text-left">
-            <h1 className="text-4xl font-bold text-gray-800 mb-4 font-baloo">
-              Enjoy the best cleaning service for your home or workplace
-            </h1>
-            <p className="text-gray-600 mb-6">
-            Experience unmatched quality and reliability with our top-rated cleaning services. Our dedicated team ensures your space is pristine, healthy, and inviting. Trust us to make your home or office shine!
-            </p>
-            
-            <div className="flex justify-center lg:justify-start mb-4">
-              <button className="bg-orange-500 text-white px-6 py-2 rounded-md hover:bg-orange-600 transition">
-                Book Now
-              </button>
-            </div>
-            <div className="flex justify-center lg:justify-start items-center space-x-4 mt-10">
-              <div className="flex items-center flex-wrap gap-10">
-                <div>
-                  <div className="flex flex-wrap">
-                    <span className="material-icons text-orange-500"><box-icon name='phone-call' type='solid' size='md' color='#FF7D29' ></box-icon></span>
-                    <div>
-                      <span className="text-gray-800 ml-2"> Call us</span><br />
-                      <span href="tel:+01234567890" className="text-gray-800 ml-2">011 456 7890</span>
+        <div className="flex flex-col lg:flex-row items-center mt-20">
+          <section className="hero-section"></section>
+          <div className="container mx-auto py-6">
+            {[
+              { title: 'General Commercial Cleaning', data: generalCommercialCleaning },
+              { title: 'High Pressure Water Blasting', data: highPressureWaterBlasting },
+              { title: 'Carpet Steam Cleaning and Maintains', data: carpetSteamCleaningAndMaintains },
+              { title: 'Builders Cleaning', data: buildersCleaning },
+              { title: 'Bond Cleaning', data: bondCleaning },
+              { title: 'House / Residential Cleaning', data: houseResidentialCleaning },
+              { title: 'Office Cleaning', data: officeCleaning },
+              { title: 'Warehouse Cleaning', data: warehouseCleaning },
+              { title: 'Hospital Cleaning', data: hospitalCleaning },
+              { title: 'School Cleaning', data: schoolCleaning },
+              { title: 'Newly Constructed Cleaning', data: newlyConstructedCleaning },
+              { title: 'Government Project Cleaning', data: governmentProjectCleaning },
+              { title: 'Hotel Cleaning', data: hotelCleaning },
+              { title: 'Restaurant Cleaning', data: restaurantCleaning },
+              { title: 'Office Boy and Maid Service', data: officeBoyAndMaidService },
+            ].map((category) => (
+              <div key={category.title}>
+                <h2 className="text-2xl font-bold mb-4 pl-7">{category.title}</h2>
+                <div className="grid grid-cols-3 gap-4 mb-8 pl-7">
+                  {category.data.map((product) => (
+                    <div key={product._id} className="border p-4 rounded-lg shadow-md">
+                      <Link to={`/product/${product.slug}`}>
+                        <img src={product.images[0]} alt={product.title} className="w-full h-40 object-cover mb-4" />
+                      </Link>
+                      <h3 className="text-lg font-semibold mb-2">
+                        <Link to={`/product/${product.slug}`}>{product.title}</Link>
+                      </h3>
+                      <p className="text-gray-600">{product.category}</p>
+                      <p className={product.quantity < 5 ? 'text-red-500' : 'text-green-500'}>
+                        {product.quantity < 5 ? 'Low Stock' : 'In Stock'}
+                      </p>
+                      <p className="text-xl font-bold">Rs. {product.price}</p>
                     </div>
-                  </div>
-                </div>
-
-                <div>
-                  <div className="flex flex-wrap">
-                    <span className="material-icons text-orange-500"><box-icon name='envelope' size='md' color='#FF7D29'></box-icon></span>
-                    <div>
-                      <span className="text-gray-800 ml-2"> Email</span><br />
-                      <span href="tel:+01234567890" className="text-gray-800 ml-2">info@email.com</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div>
-                  <div className="flex flex-wrap">
-                    <span className="material-icons text-orange-500"><box-icon name='location-plus' type='solid' size='md' color='#FF7D29' ></box-icon></span>
-                    <div>
-                      <span className="text-gray-800 ml-2"> Location</span><br />
-                      <span href="tel:+01234567890" className="text-gray-800 ml-2">location ek dnn oneee...</span>
-                    </div>
-                  </div>
+                  ))}
                 </div>
               </div>
-
-            </div>
-            
-          </div>
-          <div className="lg:w-1/2 mt-8 lg:mt-0">
-            <div className="relative">
-              <div style={{marginTop:"-55px"}}>
-                <img src="/images/cleaner.png" alt="Cleaner" className="mx-auto lg:mx-0 self-center justify-center" />
-              </div>
-              <div className="absolute top-0 right-0 mt-10 mr-4">
-                <div className="bg-yellow-200 p-2 rounded-full shadow-md">
-                  <img src="/images/facebook.png" alt="Facebook" className="w-4 h-4" />
-                </div>
-                <div className="bg-yellow-200 p-2 rounded-full shadow-md mt-2">
-                  <img src="/images/instagram.png" alt="Instagram" className="w-4 h-4" />
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </div>
