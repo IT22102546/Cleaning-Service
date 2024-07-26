@@ -2,18 +2,44 @@ import Booking from "../models/book.model.js";
 import bcryptjs from "bcryptjs";
 import { errorHandler } from "../utils/error.js";
 import jwt from "jsonwebtoken";
+import { query } from "express";
 
 export const getBooking = async (req, res, next) => {
   try {
-    const requests = await Booking.find();
-    const totalRequests = await Booking.countDocuments();
-    const lastMonthRequests = await Booking.countDocuments();
+    const { searchTerm } = req.query;
+    const queryOptions = {};
+
+    if (searchTerm) {
+      queryOptions.title = { $regex: searchTerm, $options: 'i' };
+    }
+
+    const requests = await Booking.find(queryOptions);
+    const totalRequests = await Booking.countDocuments(queryOptions);
 
     res.status(200).json({
       requests,
       totalRequests,
-      lastMonthRequests,
     });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const getOneBooking = async (req, res, next) => {
+  try {
+    const { bookId } = req.query;
+
+    if (!bookId) {
+      return res.status(400).json({ message: 'Book ID is required' });
+    }
+
+    const booking = await Booking.findById(bookId);
+
+    if (!booking) {
+      return res.status(404).json({ message: 'Booking not found' });
+    }
+
+    res.status(200).json({ booking });
   } catch (error) {
     next(error);
   }
@@ -84,23 +110,3 @@ export const deleteBooking = async (req, res, next) => {
 };
 
 
-// function generateBookingId(phone, date) {
-//   // Generate a random number
-//   const randomNum = Math.floor(Math.random() * 10000);
-
-//   // Extract the last 4 digits of the phone number
-//   const phoneLast4 = phone.slice(-4);
-
-//   // Extract the year, month, and day from the date
-//   const year = date.getFullYear().toString().slice(-2); // last two digits of the year
-//   const month = (date.getMonth() + 1).toString().padStart(2, '0'); // month is 0-indexed, pad single digit months
-//   const day = date.getDate().toString().padStart(2, '0');
-
-//   // Concatenate all parts into a single string
-//   const combined = randomNum + phoneLast4 + year + month + day;
-
-//   // Reduce the string to 5 digits by taking the first 5 characters
-//   const bookingId = combined.slice(0, 5);
-
-//   return bookingId;
-// }

@@ -19,6 +19,7 @@ import Categories from "./pages/Categories";
 import Blogs from "./pages/Blogs";
 import BookingForm from "./pages/BookingForm";
 import BookSuccess from "./pages/BookSuccess";
+import UpdateBooking from "./pages/UpdateBooking";
 
 
 export default function App() {
@@ -43,6 +44,7 @@ export default function App() {
           <Route path="/update-product/:productId" element={<UpdateProducts/>}/>
           <Route path="/book-service" element={<BookingForm/>}/>
           <Route path="/success-book" element={<BookSuccess/>}/>
+          <Route path="update-booking/:bookId" element={<UpdateBooking/>}/>
      <Route/>     
 
           <Route path="/dashboard" element={<DashBoard/>}/>
