@@ -6,11 +6,23 @@ import { Link } from "react-router-dom";
 export default function Home() {
 
   const categories = [
-    { name: 'BedRoomFurniture', imageUrl: 'https://mywayneshome.com/cdn/shop/files/media_a713c2af-9e72-4304-8452-ed6f8aca5b86_grande.jpg?v=1712009056' },
-    { name: 'LivingRoomFurniture', imageUrl: 'https://d2kz53n3bzvihv.cloudfront.net/resized/790_395_0_255_255_255/media/gbu0/categoryxxl/image/DesktopHeader-P393_LLA005_LLA008_LLA010_A.jpg.jpeg' },
-    { name: 'DinningRoomFurniture', imageUrl: 'https://furnituretogocatalogs.com/cdn/shop/products/312a1665-ce0e-4cfe-9567-7d1c55aee59f.jpg?v=1705683723' },
-    { name: 'SofaSets', imageUrl: 'https://m.media-amazon.com/images/I/71qKarjtXpL._AC_SL1491_.jpg' },
+    { name: 'GeneralCommercialCleaning', imageUrl: 'https://example.com/general-commercial-cleaning.jpg' },
+    { name: 'HighPresureWaterBlasting', imageUrl: 'https://example.com/high-pressure-water-blasting.jpg' },
+    { name: 'CarpetSteamCleaningandMaintains', imageUrl: 'https://example.com/carpet-steam-cleaning.jpg' },
+    { name: 'BuildersCleaning', imageUrl: 'https://example.com/builders-cleaning.jpg' },
+    { name: 'BondCleaning', imageUrl: 'https://example.com/bond-cleaning.jpg' },
+    { name: 'HouseResidentalCleaning', imageUrl: 'https://example.com/house-residential-cleaning.jpg' },
+    { name: 'OfficeCleaning', imageUrl: 'https://example.com/office-cleaning.jpg' },
+    { name: 'WarehouseCleaning', imageUrl: 'https://example.com/warehouse-cleaning.jpg' },
+    { name: 'HospitalCleaning', imageUrl: 'https://example.com/hospital-cleaning.jpg' },
+    { name: 'SchoolCleaning', imageUrl: 'https://example.com/school-cleaning.jpg' },
+    { name: 'NewlyConstructedCleaning', imageUrl: 'https://example.com/newly-constructed-cleaning.jpg' },
+    { name: 'GovernmentProjecCleaning', imageUrl: 'https://example.com/government-project-cleaning.jpg' },
+    { name: 'HotelCleaning', imageUrl: 'https://example.com/hotel-cleaning.jpg' },
+    { name: 'RestaurentCleaning', imageUrl: 'https://example.com/restaurant-cleaning.jpg' },
+    { name: 'OfficeBoyandMaidService', imageUrl: 'https://example.com/office-boy-maid-service.jpg' }
 ];
+
   return (
     <div className="relative bg-white min-h-screen flex items-center justify-center">
       <div className="container mx-auto px-6 lg:px-8 py-12">

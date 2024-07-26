@@ -9,7 +9,7 @@ const serviceSchema = new mongoose.Schema(
     title: {
       type: String,
       required: true,
-      unique: false,
+      unique: true,
     },
     description: {
       type: String,
