@@ -9,7 +9,7 @@ const serviceSchema = new mongoose.Schema(
     title: {
       type: String,
       required: true,
-      unique: true,
+      unique: false,
     },
     description: {
       type: String,
@@ -34,14 +34,7 @@ const serviceSchema = new mongoose.Schema(
       required: true,
       unique: true,
     },
-    price: {
-      type: Number,
-      required: true,
-    },
-    quantity: {
-      type: Number,
-      required: true,
-    },
+    
     promotions: {
       type: String,
     },

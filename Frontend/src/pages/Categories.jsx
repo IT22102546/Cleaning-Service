@@ -22,6 +22,9 @@ export default function Categories() {
     const fetchProductsByCategory = async (category, setState) => {
       try {
         const response = await fetch(`/api/products/category?category=${category}`);
+        if (!response.ok) {
+          throw new Error(`Failed to fetch products for category: ${category}`);
+        }
         const data = await response.json();
         setState(data.products);
       } catch (error) {
@@ -30,7 +33,7 @@ export default function Categories() {
     };
 
     fetchProductsByCategory('GeneralCommercialCleaning', setGeneralCommercialCleaning);
-    fetchProductsByCategory('HighPressureWaterBlasting', setHighPressureWaterBlasting);
+    fetchProductsByCategory('HighPresureWaterBlasting', setHighPressureWaterBlasting);
     fetchProductsByCategory('CarpetSteamCleaningAndMaintains', setCarpetSteamCleaningAndMaintains);
     fetchProductsByCategory('BuildersCleaning', setBuildersCleaning);
     fetchProductsByCategory('BondCleaning', setBondCleaning);

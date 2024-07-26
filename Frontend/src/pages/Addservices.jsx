@@ -234,7 +234,7 @@ export default function AddProducts() {
                 }}
               />
               <div className="flex flex-col gap-4 sm:flex-row justify-between">
-                <TextInput
+                {/* <TextInput
                   type="number"
                   placeholder="Price"
                   id="price"
@@ -249,7 +249,7 @@ export default function AddProducts() {
                   onChange={(e) =>
                     setFormData({ ...formData, quantity: e.target.value })
                   }
-                />
+                /> */}
               </div>
               <Button type="submit" className="bg-slate-400">
                 Add Products

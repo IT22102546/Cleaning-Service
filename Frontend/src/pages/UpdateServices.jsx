@@ -120,18 +120,29 @@ export default function UpdateProducts() {
 
   return (
     <div className="p-3 max-w-3xl mx-auto min-h-screen">
-      <h1 className="text-center text-3xl my-7 font-semibold">Update Products</h1>
+      <section className="hero-section"></section>
+      <h1 className="text-center text-3xl my-7 font-semibold mt-24">Update Products</h1>
       <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
         <div className='flex flex-col gap-4 sm:flex-row justify-between'>
           <TextInput type='text' placeholder='Title' required id='title' className='flex-1' onChange={(e) =>
             setFormData({ ...formData, title: e.target.value })
           } value={formData.title || ''} />
           <Select onChange={(e) => setFormData({ ...formData, category: e.target.value })} value={formData.category || 'uncategorized'}>
-            <option value='uncategorized'>Uncategorized</option>
-            <option value='BedRoomFurniture'>Bed Room Furniture</option>
-            <option value='LivingRoomFurniture'>Living Room Furniture</option>
-            <option value='DinningRoomFurniture'>Dining Room Furniture</option>
-            <option value='SofaSets'>Sofa Sets</option>
+          <option value="GeneralCommercialCleaning">General Commercial Cleaning</option>
+          <option value="HighPresureWaterBlasting">High Presure Water Blasting</option>
+          <option value="CarpetSteamCleaningandMaintains">Carpet Steam Cleaning and Maintains</option>
+          <option value="BuildersCleaning">Builders Cleaning</option>
+          <option value="BondCleaning">Bond Cleaning</option>
+          <option value="HouseResidentalCleaning">House / Residental Cleaning</option>
+          <option value="OfficeCleaning">Office Cleaning</option>
+          <option value="WarehouseCleaning">Warehouse Cleaning</option>
+          <option value="HospitalCleaning">Hospital Cleaning</option>
+          <option value="SchoolCleaning">School Cleaning</option>
+          <option value="NewlyConstructedCleaning">Newly Constructed Cleaning</option>
+          <option value="GovernmentProjecCleaning">Government Projec Cleaning</option>
+          <option value="HotelCleaning">Hotel Cleaning</option>
+          <option value="RestaurentCleaning">Restaurent Cleaning</option>
+          <option value="OfficeBoyandMaidService">Office Boy and Maid Service</option>
           </Select>
         </div>
         {[0, 1, 2, 3].map((index) => (
@@ -158,14 +169,14 @@ export default function UpdateProducts() {
           onChange={(e) => setFormData({ ...formData, description: e.target.value })}
           value={formData.description || ''}
         />
-        <div className='flex flex-col gap-4 sm:flex-row justify-between'>
+        {/* <div className='flex flex-col gap-4 sm:flex-row justify-between'>
           <TextInput type="number" placeholder="Price" id="price" onChange={(e) =>
             setFormData({ ...formData, price: e.target.value })
           } value={formData.price || ''} />
           <TextInput type="number" placeholder="Quantity" id="stockQuantity" onChange={(e) =>
             setFormData({ ...formData, quantity: e.target.value })
           } value={formData.quantity || ''} />
-        </div>
+        </div> */}
         <Button type='submit' gradientDuoTone='purpleToBlue'>Update</Button>
         {publishError && (
           <Alert className='mt-5' color='failure'>

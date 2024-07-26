@@ -72,8 +72,8 @@ export default function Home() {
           </div>
           <div className="lg:w-1/2 mt-8 lg:mt-0">
             <div className="relative">
-              <div style={{marginTop:"-55px"}}>
-                <img src="/images/cleaner.png" alt="Cleaner" className="mx-auto lg:mx-0 self-center justify-center" />
+              <div style={{marginTop:"-55px"}} >
+                <img src="/images/cleaner.png" alt="Cleaner" className="hidden md:block mx-auto lg:mx-0 self-center justify-center" />
               </div>
               <div className="absolute top-0 right-0 mt-10 mr-4">
                 <div className="bg-secondary p-2 rounded-full shadow-md hover:bg-blue-900 transition hover:cursor-pointer">
