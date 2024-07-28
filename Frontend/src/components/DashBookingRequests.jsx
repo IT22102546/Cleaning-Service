@@ -131,6 +131,7 @@ const formatDate = (dateString) => {
                         {/* <Link  to={`/update-booking/${item._id}`}>
                             <box-icon name='edit-alt' color="orange"></box-icon>
                         </Link> */}
+                        
                         <Link onClick={() => {
                         setShowModel(true);
                         setBookIdToDelete(item._id);
