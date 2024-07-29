@@ -20,6 +20,7 @@ import Blogs from "./pages/Blogs";
 import BookingForm from "./pages/BookingForm";
 import BookSuccess from "./pages/BookSuccess";
 import UpdateBooking from "./pages/UpdateBooking";
+import FloatingWhatsAppButton from "./components/FloatingWhatsAppButton";
 
 
 export default function App() {
@@ -55,6 +56,7 @@ export default function App() {
 
     </Routes>
     <Footer/>
+    <FloatingWhatsAppButton />
    </BrowserRouter>
 
   )

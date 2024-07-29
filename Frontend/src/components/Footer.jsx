@@ -15,10 +15,10 @@ const Footer = () => {
                 <box-icon type='logo' name='twitter' color='white'></box-icon>
               </a>
               <a href="https://linkedin.com" className="text-gray-600 hover:text-gray-900">
-                <box-icon type='logo' name='linkedin'></box-icon>
+                <box-icon type='logo' name='linkedin' color='white'></box-icon>
               </a>
               <a href="https://example.com" className="text-gray-600 hover:text-gray-900">
-                <box-icon type='logo' name='facebook'></box-icon>
+                <box-icon type='logo' name='facebook' color='white'></box-icon>
               </a>
               
             </div>
