@@ -98,15 +98,15 @@ export const updateBooking = async (req, res, next) => {
 
 export const deleteBooking = async (req, res, next) => {
   try {
-    if (!req.user.isAdmin || req.user.id !== req.params.userId) {
-      return next(errorHandler(403, 'You are not allowed to delete this post'));
-    }
-    await Product.findByIdAndDelete(req.params.bookId);
+    // if (!req.user.isAdmin || req.user.id !== req.params.userId) {
+    //   return next(errorHandler(403, 'You are not allowed to delete this post'));
+    // }
+    await Booking.findByIdAndDelete(req.params.bookid); // Corrected parameter name
     res.status(200).json('The booking has been deleted');
   } catch (error) {
     next(error);
   }
-  
 };
+
 
 

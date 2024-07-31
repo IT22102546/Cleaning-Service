@@ -32,7 +32,8 @@ app.use(cors(corsOptions));
 app.use("/api/auth",authRoute);
 app.use("/api/user",userRoute); 
 app.use("/api/products",serviceRoute);
-app.use("/api/book",bookService);
+app.use("/api/book", bookService);
+
 
 app.use((err,req,res,next)=>{
     const statusCode = err.statusCode || 500;

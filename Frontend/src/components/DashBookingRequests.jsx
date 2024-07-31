@@ -34,13 +34,11 @@ export default function DashBookingRequests() {
 
   const handleDeleteBooking = async () => {
     setShowModel(false);
+    console.log(bookIdToDelete);
     try {
-      const res = await fetch(
-        `/api/products/deleteproduct/${bookIdToDelete}/${currentUser._id}`,
-        {
-          method: 'DELETE',
-        }
-      );
+      const res = await fetch(`/api/book/delete-book/${bookIdToDelete}`, {
+        method: 'DELETE',
+      });
       const data = await res.json();
       if (!res.ok) {
         console.log(data.message);
@@ -53,6 +51,7 @@ export default function DashBookingRequests() {
       console.log(error.message);
     }
   };
+  
 
   
 
@@ -109,7 +108,7 @@ const formatDate = (dateString) => {
         <>
           <Table hoverable className="shadow-md">
             <Table.Head>
-              <Table.HeadCell>Book Id</Table.HeadCell>
+              
               <Table.HeadCell>Name</Table.HeadCell>
               <Table.HeadCell>Email</Table.HeadCell>
               <Table.HeadCell>Phone</Table.HeadCell>
@@ -122,7 +121,7 @@ const formatDate = (dateString) => {
             {requests.map((item) => (
               <Table.Body className='divide-y' key={item._id}>
                 <Table.Row className='bg-white dark:border-gray-700 dark:bg-gray-800'>
-                  <Table.Cell>{item.bookId}</Table.Cell>
+                  
                   <Table.Cell>{item.name}</Table.Cell>
                   <Table.Cell>{item.email}</Table.Cell>
                   <Table.Cell>{item.phone}</Table.Cell>
