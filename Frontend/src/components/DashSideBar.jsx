@@ -83,25 +83,10 @@ export default function DashSideBar() {
                   Booking Requests
                 </Sidebar.Item>
               </Link>
-
-              <Link to='/dashboard?tab=confirmbookings' key="bookings">
-                <Sidebar.Item
-                  active={tab === 'confirmbookings'}
-                  icon={HiBookmark}
-                  as='div'
-                >
-                  Accepted Bookings
-                </Sidebar.Item>
-              </Link>
-
              
             </>
           )}
 
-              
-             
-
-              
           <Sidebar.Item 
             icon={HiArrowSmRight} 
             className="cursor-pointer" 

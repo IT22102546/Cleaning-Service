@@ -1,4 +1,4 @@
-import { Button, Modal, Table } from "flowbite-react";
+import { Button, Checkbox, Modal, Table } from "flowbite-react";
 import { useEffect, useState } from "react";
 import { HiGift, HiOutlineExclamationCircle } from "react-icons/hi";
 import { useSelector } from "react-redux";
@@ -54,9 +54,7 @@ export default function DashBookingRequests() {
     }
   };
 
-  const handleSearch = (e) => {
-    setSearchTerm(e.target.value);
-  };
+  
 
 const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -67,23 +65,19 @@ const formatDate = (dateString) => {
   return (
     <div className='mt-24 table-auto overflow-x-scroll md:mx-auto p-3 scrollbar scrollbar-track-slate-100 scrollbar-thumb-slate-300 dark:scrollbar-track-slate-700 dark:scrollbar-thumb-slate-500'>
       <section className="hero-section"></section>
-      <div className='flex justify-between'>
-        {/* <input
-          type="text"
-          placeholder="Search Products.."
-          value={searchTerm}
-          onChange={handleSearch}
-          className="px-3 py-2 w-150 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 mr-2 h-10 dark:bg-slate-800 placeholder-gray-500"
-        /> */}
-        <div></div>
-        {/* <Button
-          gradientDuoTone='purpleToBlue'
-          outline
-         
-          className=""
-        >
-          Generate Report
-        </Button> */}
+
+      <div className="flex flex-row justify-center">
+
+      <div className='flex-wrap flex gap-4 justify-center p-3'>
+        <div className='flex flex-col p-3 dark:bg-slate-800 gap-4 md:w-72 w-full rounded-md shadow-md'>
+          <div className='flex justify-between'>
+            <div className=''>
+              <h3 className='text-gray-500 text-md uppercase'>Total Requests</h3>
+              <p className='text-2xl'>{totalRequests}</p>
+            </div>
+            <HiGift className='bg-red-600 text-white rounded-full text-5xl p-3 shadow-lg' />
+          </div>
+        </div>
       </div>
 
       <div className='flex-wrap flex gap-4 justify-center p-3'>
@@ -96,8 +90,21 @@ const formatDate = (dateString) => {
             <HiGift className='bg-red-600 text-white rounded-full text-5xl p-3 shadow-lg' />
           </div>
         </div>
-        
       </div>
+
+      <div className='flex-wrap flex gap-4 justify-center p-3'>
+        <div className='flex flex-col p-3 dark:bg-slate-800 gap-4 md:w-72 w-full rounded-md shadow-md'>
+          <div className='flex justify-between'>
+            <div className=''>
+              <h3 className='text-gray-500 text-md uppercase'>Total Requests</h3>
+              <p className='text-2xl'>{totalRequests}</p>
+            </div>
+            <HiGift className='bg-red-600 text-white rounded-full text-5xl p-3 shadow-lg' />
+          </div>
+        </div>
+      </div>
+      </div>
+
       {currentUser.isAdmin && requests.length > 0 ? (
         <>
           <Table hoverable className="shadow-md">
@@ -124,18 +131,13 @@ const formatDate = (dateString) => {
                   <Table.Cell>{formatDate(item.date)}</Table.Cell>
                   <Table.Cell>{item.paymentMethod}</Table.Cell>
                   <Table.Cell>
-                    <div className="flex flex-row justify-center">
-                        <Link >
-                            <box-icon name='check-circle' color="green"></box-icon>
-                        </Link>
-                        {/* <Link  to={`/update-booking/${item._id}`}>
-                            <box-icon name='edit-alt' color="orange"></box-icon>
-                        </Link> */}
-                        
+                    <div className="flex flex-col justify-center">
+                            <p>Accept</p> <Checkbox></Checkbox>
+                            <p>Mark as Completed</p> <Checkbox></Checkbox>
                         <Link onClick={() => {
-                        setShowModel(true);
-                        setBookIdToDelete(item._id);
-                      }}>
+                            setShowModel(true);
+                            setBookIdToDelete(item._id);
+                          }}>
                             <box-icon name='x-circle' color="red"></box-icon>
                         </Link>
                         
