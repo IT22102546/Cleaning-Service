@@ -13,8 +13,69 @@ export default function DashBookingRequests() {
   const [totalAcceptRequests, setTotalAcceptRequests] = useState(0);
   const [totalFinishedRequests, setTotalFinishedRequests] = useState(0);
   const [searchTerm, setSearchTerm] = useState("");
+  const [showAcceptedOnly, setShowAcceptedOnly] = useState(false);
+  const [showCompletedOnly, setShowCompletedOnly] = useState(false);
+  const [showMore, setShowMore] = useState(true);
+
 
   useEffect(() => {
+    if (showAcceptedOnly) {
+      const fetchAcceptedOnly = async () => {
+        try {
+          const res = await fetch("/api/book/getacceptedreq");
+          const data = await res.json();
+          if (res.ok) {
+            setRequests(data.accepted);
+          }
+          setShowMore(false);
+        } catch (error) {
+          console.log(error.message);
+        }
+      };
+      fetchAcceptedOnly();
+    } else if (showCompletedOnly) {
+      const fetchCompletedOnly = async () => {
+        try {
+          const res = await fetch("/api/book/getcompletedreq");
+          const data = await res.json();
+          if (res.ok) {
+            setRequests( data.completed);
+          }
+          setShowMore(false);
+        } catch (error) {
+          console.log(error.message);
+        }
+      };
+      fetchCompletedOnly();
+    } else {
+      const fetchRequests = async () => {
+        try {
+          const res = await fetch(
+            `/api/book/get-bookings?searchTerm=${searchTerm}`
+          );
+          const data = await res.json();
+          if (res.ok) {
+            setRequests(data.requests);
+            setTotalRequests(data.totalRequests);
+            setTotalAcceptRequests(
+              data.requests.filter((req) => req.isAccepted).length
+            );
+            setTotalFinishedRequests(  
+              data.requests.filter((req) => req.isCompleted).length
+            );
+          }
+        } catch (error) {
+          console.log(error.message);
+        }
+      };
+
+      if (currentUser.isAdmin) {
+        fetchRequests();
+      }
+    }
+  }, [currentUser._id, searchTerm, showAcceptedOnly, showCompletedOnly]);
+
+  /*useEffect(() => {
     const fetchRequests = async () => {
       try {
         const res = await fetch(
@@ -38,7 +99,7 @@ export default function DashBookingRequests() {
 
     
     fetchRequests();
-  }, [searchTerm]);
+  }, [searchTerm]);*/
 
   const handleDeleteBooking = async () => {
     setShowModel(false);
@@ -64,14 +125,14 @@ export default function DashBookingRequests() {
     setRequests((prevRequests) =>
       prevRequests.map((request) =>
         request._id === id
-          ? { ...request, accepted: !request.accepted }
+          ? { ...request, isAccepted: !request.isAccepted }
           : request
       )
     );
     setTotalAcceptRequests(
       (prev) =>
         prev +
-        (requests.find((request) => request._id === id).accepted ? -1 : 1)
+        (requests.find((request) => request._id === id).isAccepted ? -1 : 1)
     );
   };
 
@@ -79,15 +140,23 @@ export default function DashBookingRequests() {
     setRequests((prevRequests) =>
       prevRequests.map((request) =>
         request._id === id
-          ? { ...request, finished: !request.finished }
+          ? { ...request, isCompleted: !request.isCompleted }
           : request
       )
     );
     setTotalFinishedRequests(
       (prev) =>
         prev +
-        (requests.find((request) => request._id === id).finished ? -1 : 1)
+        (requests.find((request) => request._id === id).isCompleted ? -1 : 1)
     );
+  };
+  
+  const handleCheckboxChangeACCEPETED = (e) => {
+    setShowAcceptedOnly(e.target.checked);
+  };
+
+  const handleCheckboxChangeCOMPLETED = (e) => {
+    setShowCompletedOnly(e.target.checked);
   };
 
   const formatDate = (dateString) => {
@@ -140,6 +209,31 @@ export default function DashBookingRequests() {
         </div>
       </div>
 
+      <div className="flex flex-row justify-center">
+        <div>
+          <label>
+            Accepeted:
+            <input
+              type="checkbox"
+              checked={showAcceptedOnly}
+              onChange={handleCheckboxChangeACCEPETED}
+              className="ml-2"
+            />
+          </label>
+        </div>
+        <div className="ml-2">
+          <label>
+            Mark as complete:
+            <input
+              type="checkbox"
+              checked={showCompletedOnly}
+              onChange={handleCheckboxChangeCOMPLETED}
+              className="ml-2"
+            />
+          </label>
+        </div>
+      </div>
+
       {currentUser.isAdmin && requests.length > 0 ? (
         <>
           <Table hoverable className="shadow-md">
@@ -169,22 +263,20 @@ export default function DashBookingRequests() {
                   <Table.Cell>
                     <div className="flex flex-col justify-center">
                       <div className="flex items-center">
-                        
                         <Checkbox
-                          checked={item.accepted}
+                          checked={item.isAccepted}
                           onChange={() => handleAcceptChange(item._id)}
                         />
                         <p className="ml-3">Accept</p>
-
                       </div>
                       <div className="flex items-center">
-                        
                         <Checkbox
-                          checked={item.finished}
+                          checked={item.isCompleted}
                           onChange={() => handleFinishChange(item._id)}
                         />
                         <p className="ml-3">Mark as Complete</p>
                       </div>
+
                       <Link
                         onClick={() => {
                           setShowModel(true);
@@ -193,7 +285,6 @@ export default function DashBookingRequests() {
                       >
                         <box-icon name="x-circle" color="red"></box-icon>
                       </Link>
-                      
                     </div>
                   </Table.Cell>
                 </Table.Row>
@@ -231,3 +322,66 @@ export default function DashBookingRequests() {
     </div>
   );
 }
+
+
+
+
+/*
+const handleAcceptChange = async (id) => {
+    const requestToUpdate = requests.find((request) => request._id === id);
+    const newAcceptedStatus = !requestToUpdate.isAccepted;
+  
+    try {
+      const res = await fetch(`/api/book/update-book/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ isAccepted: newAcceptedStatus }),
+      });
+      if (res.ok) {
+        setRequests((prevRequests) =>
+          prevRequests.map((request) =>
+            request._id === id
+              ? { ...request, isAccepted: newAcceptedStatus }
+              : request
+          )
+        );
+        setTotalAcceptRequests((prev) =>
+          newAcceptedStatus ? prev + 1 : prev - 1
+        );
+      } else {
+        console.log("Failed to update request status");
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+  
+  const handleFinishChange = async (id) => {
+    const requestToUpdate = requests.find((request) => request._id === id);
+    const newCompletedStatus = !requestToUpdate.isCompleted;
+  
+    try {
+      const res = await fetch(`/api/book/update-book/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ isCompleted: newCompletedStatus }),
+      });
+      if (res.ok) {
+        setRequests((prevRequests) =>
+          prevRequests.map((request) =>
+            request._id === id
+              ? { ...request, isCompleted: newCompletedStatus }
+              : request
+          )
+        );
+        setTotalFinishedRequests((prev) =>
+          newCompletedStatus ? prev + 1 : prev - 1
+        );
+      } else {
+        console.log("Failed to update request status");
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+*/ 
