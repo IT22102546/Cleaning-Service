@@ -17,8 +17,28 @@ export default function DashBookingRequests() {
   const [showCompletedOnly, setShowCompletedOnly] = useState(false);
   const [showMore, setShowMore] = useState(true);
 
-
   useEffect(() => {
+    const fetchRequests = async () => {
+      try {
+        const res = await fetch(
+          `/api/book/get-bookings?searchTerm=${searchTerm}`
+        );
+        const data = await res.json();
+        if (res.ok) {
+          setRequests(data.requests);
+          setTotalRequests(data.totalRequests);
+          setTotalAcceptRequests(
+            data.requests.filter((req) => req.isAccepted).length
+          );
+          setTotalFinishedRequests(
+            data.requests.filter((req) => req.isCompleted).length
+          );
+        }
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
+
     if (showAcceptedOnly) {
       const fetchAcceptedOnly = async () => {
         try {
@@ -39,7 +59,7 @@ export default function DashBookingRequests() {
           const res = await fetch("/api/book/getcompletedreq");
           const data = await res.json();
           if (res.ok) {
-            setRequests( data.completed);
+            setRequests(data.completed);
           }
           setShowMore(false);
         } catch (error) {
@@ -47,58 +67,10 @@ export default function DashBookingRequests() {
         }
       };
       fetchCompletedOnly();
-    } else {
-      const fetchRequests = async () => {
-        try {
-          const res = await fetch(
-            `/api/book/get-bookings?searchTerm=${searchTerm}`
-          );
-          const data = await res.json();
-          if (res.ok) {
-            setRequests(data.requests);
-            setTotalRequests(data.totalRequests);
-            setTotalAcceptRequests(
-              data.requests.filter((req) => req.isAccepted).length
-            );
-            setTotalFinishedRequests(  
-              data.requests.filter((req) => req.isCompleted).length
-            );
-          }
-        } catch (error) {
-          console.log(error.message);
-        }
-      };
-
-      if (currentUser.isAdmin) {
-        fetchRequests();
-      }
+    } else if (currentUser.isAdmin) {
+      fetchRequests();
     }
   }, [currentUser._id, searchTerm, showAcceptedOnly, showCompletedOnly]);
-
-  /*useEffect(() => {
-    const fetchRequests = async () => {
-      try {
-        const res = await fetch(
-          `/api/book/get-bookings?searchTerm=${searchTerm}`
-        );
-        const data = await res.json();
-        if (res.ok) {
-          setRequests(data.requests);
-          setTotalRequests(data.totalRequests);
-          setTotalAcceptRequests(
-            data.requests.filter((req) => req.accepted).length
-          );
-          setTotalFinishedRequests(
-            data.requests.filter((req) => req.finished).length
-          );
-        }
-      } catch (error) {
-        console.log(error.message);
-      }
-    };
-
-    fetchRequests();
-  }, [searchTerm]);*/
 
   const handleDeleteBooking = async () => {
     setShowModel(false);
@@ -106,55 +78,76 @@ export default function DashBookingRequests() {
       const res = await fetch(`/api/book/delete-book/${bookIdToDelete}`, {
         method: "DELETE",
       });
-      const data = await res.json();
       if (res.ok) {
         setRequests((prev) =>
           prev.filter((request) => request._id !== bookIdToDelete)
         );
         setTotalRequests((prev) => prev - 1);
-      } else {
-        console.log(data.message);
       }
     } catch (error) {
       console.log(error.message);
     }
   };
 
-  const handleAcceptChange = (id) => {
-    setRequests((prevRequests) =>
-      prevRequests.map((request) =>
-        request._id === id
-          ? { ...request, isAccepted: !request.isAccepted }
-          : request
-      )
-    );
-    setTotalAcceptRequests(
-      (prev) =>
-        prev +
-        (requests.find((request) => request._id === id).isAccepted ? -1 : 1)
-    );
+  const handleAcceptChange = async (id) => {
+    const requestToUpdate = requests.find((request) => request._id === id);
+    const newAcceptedStatus = !requestToUpdate.isAccepted;
+
+    try {
+      const res = await fetch(`/api/book/accept-book/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ isAccepted: newAcceptedStatus }),
+      });
+      if (res.ok) {
+        setRequests((prevRequests) =>
+          prevRequests.map((request) =>
+            request._id === id
+              ? { ...request, isAccepted: newAcceptedStatus }
+              : request
+          )
+        );
+        setTotalAcceptRequests((prev) =>
+          newAcceptedStatus ? prev + 1 : prev - 1
+        );
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 
-  const handleFinishChange = (id) => {
-    setRequests((prevRequests) =>
-      prevRequests.map((request) =>
-        request._id === id
-          ? { ...request, isCompleted: !request.isCompleted }
-          : request
-      )
-    );
-    setTotalFinishedRequests(
-      (prev) =>
-        prev +
-        (requests.find((request) => request._id === id).isCompleted ? -1 : 1)
-    );
+  const handleFinishChange = async (id) => {
+    const requestToUpdate = requests.find((request) => request._id === id);
+    const newCompletedStatus = !requestToUpdate.isCompleted;
+
+    try {
+      const res = await fetch(`/api/book/complete-book/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ isCompleted: newCompletedStatus }),
+      });
+      if (res.ok) {
+        setRequests((prevRequests) =>
+          prevRequests.map((request) =>
+            request._id === id
+              ? { ...request, isCompleted: newCompletedStatus }
+              : request
+          )
+        );
+        setTotalFinishedRequests((prev) =>
+          newCompletedStatus ? prev + 1 : prev - 1
+        );
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
   };
-  
-  const handleCheckboxChangeACCEPETED = (e) => {
+
+  const handleCheckboxChangeAccepted = (e) => {
     setShowAcceptedOnly(e.target.checked);
   };
 
-  const handleCheckboxChangeCOMPLETED = (e) => {
+  const handleCheckboxChangeCompleted = (e) => {
     setShowCompletedOnly(e.target.checked);
   };
 
@@ -208,25 +201,25 @@ export default function DashBookingRequests() {
         </div>
       </div>
 
-      <div className="flex flex-row justify-center">
+      <div className="flex flex-row justify-start m-5">
         <div>
-          <label>
-            Accepeted:
+          <label className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
+            Accepted:
             <input
               type="checkbox"
               checked={showAcceptedOnly}
-              onChange={handleCheckboxChangeACCEPETED}
+              onChange={handleCheckboxChangeAccepted}
               className="ml-2"
             />
           </label>
         </div>
         <div className="ml-2">
-          <label>
+          <label className="ml-4 whitespace-nowrap font-medium text-gray-900 dark:text-white">
             Mark as complete:
             <input
               type="checkbox"
               checked={showCompletedOnly}
-              onChange={handleCheckboxChangeCOMPLETED}
+              onChange={handleCheckboxChangeCompleted}
               className="ml-2"
             />
           </label>
@@ -243,144 +236,100 @@ export default function DashBookingRequests() {
               <Table.HeadCell>Address</Table.HeadCell>
               <Table.HeadCell>Service Type</Table.HeadCell>
               <Table.HeadCell>Date</Table.HeadCell>
-              <Table.HeadCell>Payment Method</Table.HeadCell>
-              <Table.HeadCell>Action</Table.HeadCell>
+              <Table.HeadCell>Accept</Table.HeadCell>
+              <Table.HeadCell>Mark as Complete</Table.HeadCell>
+              <Table.HeadCell>Delete</Table.HeadCell>
             </Table.Head>
-            {requests.map((item) => (
-              <Table.Body className="divide-y" key={item._id}>
-                <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
-                  <Table.Cell>{item.name}</Table.Cell>
-                  <Table.Cell>{item.email}</Table.Cell>
-                  <Table.Cell>{item.phone}</Table.Cell>
-                  <Table.Cell>
-                    {item.address}, {item.city} <br /> {item.state} <br />{" "}
-                    {item.zip}
+            <Table.Body className="divide-y">
+              {requests.map((request) => (
+                <Table.Row key={request._id} className="dark:border-gray-700">
+                  <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
+                    {request.name}
                   </Table.Cell>
-                  <Table.Cell>{item.serviceType}</Table.Cell>
-                  <Table.Cell>{formatDate(item.date)}</Table.Cell>
-                  <Table.Cell>{item.paymentMethod}</Table.Cell>
+                  <Table.Cell>{request.email}</Table.Cell>
+                  <Table.Cell>{request.phone}</Table.Cell>
+                  <Table.Cell>{request.address}</Table.Cell>
+                  <Table.Cell>{request.serviceType}</Table.Cell>
+                  <Table.Cell>{formatDate(request.createdAt)}</Table.Cell>
                   <Table.Cell>
-                    <div className="flex flex-col justify-center">
-                      <div className="flex items-center">
-                        <Checkbox
-                          checked={item.isAccepted}
-                          onChange={() => handleAcceptChange(item._id)}
-                        />
-                        <p className="ml-3">Accept</p>
-                      </div>
-                      <div className="flex items-center">
-                        <Checkbox
-                          checked={item.isCompleted}
-                          onChange={() => handleFinishChange(item._id)}
-                        />
-                        <p className="ml-3">Mark as Complete</p>
-                      </div>
-
-                      <Link
-                        onClick={() => {
-                          setShowModel(true);
-                          setBookIdToDelete(item._id);
-                        }}
-                      >
-                        <box-icon name="x-circle" color="red"></box-icon>
-                      </Link>
-                    </div>
+                    <Button
+                      className={`bg-${
+                        request.isAccepted ? "green" : "blue"
+                      }-500 text-white`}
+                      onClick={() => handleAcceptChange(request._id)}
+                    >
+                      {request.isAccepted ? "Reject" : "Accept"}
+                    </Button>
+                  </Table.Cell>
+                  <Table.Cell>
+                    <Button
+                      className={`bg-${
+                        request.isCompleted ? "green" : "blue"
+                      }-500 text-white`}
+                      onClick={() => handleFinishChange(request._id)}
+                    >
+                      {request.isCompleted ? "Unmark" : "Mark"}
+                    </Button>
+                  </Table.Cell>
+                  <Table.Cell>
+                    <Button
+                      className="bg-red-600 text-white"
+                      onClick={() => {
+                        setShowModel(true);
+                        setBookIdToDelete(request._id);
+                      }}
+                    >
+                      Delete
+                    </Button>
                   </Table.Cell>
                 </Table.Row>
-              </Table.Body>
-            ))}
+              ))}
+            </Table.Body>
           </Table>
+          {/*showMore && (
+            <div className="flex justify-center m-5">
+              <Link to="/dashboard/bookings">
+                <Button className="bg-green-500 text-white">Show More</Button>
+              </Link>
+            </div>
+          )*/}
         </>
       ) : (
-        <p>You have no products to show</p>
+        <div className="flex justify-center p-10 bg-slate-100 rounded-md">
+          <h3 className="text-gray-500 text-lg">No booking requests found.</h3>
+        </div>
       )}
+
       <Modal
         show={showModel}
-        onClose={() => setShowModel(false)}
-        popup
         size="md"
+        popup={true}
+        onClose={() => setShowModel(false)}
       >
         <Modal.Header />
         <Modal.Body>
           <div className="text-center">
-            <HiOutlineExclamationCircle className="h-14 w-14 text-gray-400 dark:text-gray-200 mb-4 mx-auto" />
-            <h3 className="mb-5 text-lg text-gray-500 dark:text-gray-200">
-              Are you sure you want to Delete this Booking
+            <HiOutlineExclamationCircle className="mx-auto mb-4 h-14 w-14 text-gray-400 dark:text-gray-200" />
+            <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
+              Are you sure you want to delete this booking?
             </h3>
-          </div>
-          <div className="flex justify-center gap-4">
-            <Button color="failure" onClick={handleDeleteBooking}>
-              Yes, I am sure
-            </Button>
-            <Button color="gray" onClick={() => setShowModel(false)}>
-              No, cancel
-            </Button>
+            <div className="flex justify-center gap-4">
+              <Button
+                className="bg-red-600 text-white"
+                onClick={handleDeleteBooking}
+              >
+                Yes, I'm sure
+              </Button>
+              <Button
+                className="bg-gray-500 text-white"
+                onClick={() => setShowModel(false)}
+              >
+                No, cancel
+              </Button>
+            </div>
           </div>
         </Modal.Body>
       </Modal>
     </div>
   );
 }
-
-
-
-
-/*
-const handleAcceptChange = async (id) => {
-    const requestToUpdate = requests.find((request) => request._id === id);
-    const newAcceptedStatus = !requestToUpdate.isAccepted;
-  
-    try {
-      const res = await fetch(`/api/book/update-book/${id}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ isAccepted: newAcceptedStatus }),
-      });
-      if (res.ok) {
-        setRequests((prevRequests) =>
-          prevRequests.map((request) =>
-            request._id === id
-              ? { ...request, isAccepted: newAcceptedStatus }
-              : request
-          )
-        );
-        setTotalAcceptRequests((prev) =>
-          newAcceptedStatus ? prev + 1 : prev - 1
-        );
-      } else {
-        console.log("Failed to update request status");
-      }
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
-  
-  const handleFinishChange = async (id) => {
-    const requestToUpdate = requests.find((request) => request._id === id);
-    const newCompletedStatus = !requestToUpdate.isCompleted;
-  
-    try {
-      const res = await fetch(`/api/book/update-book/${id}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ isCompleted: newCompletedStatus }),
-      });
-      if (res.ok) {
-        setRequests((prevRequests) =>
-          prevRequests.map((request) =>
-            request._id === id
-              ? { ...request, isCompleted: newCompletedStatus }
-              : request
-          )
-        );
-        setTotalFinishedRequests((prev) =>
-          newCompletedStatus ? prev + 1 : prev - 1
-        );
-      } else {
-        console.log("Failed to update request status");
-      }
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
-*/ 

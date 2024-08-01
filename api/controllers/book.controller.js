@@ -83,14 +83,14 @@ export const updateBooking = async (req, res, next) => {
   }
 };
 
-export const deleteBooking = async (req, res, next) => {
+/*export const deleteBooking = async (req, res, next) => {
   try {
     await Booking.findByIdAndDelete(req.params.bookid);
     res.status(200).json('The booking has been deleted');
   } catch (error) {
     next(error);
   }
-};
+};*/
 
 export const getAcceptedREQ = async (req, res, next) => {
   try {
@@ -111,3 +111,50 @@ export const getCompletedREQ = async (req, res, next) => {
     res.status(500).json({ status: 500, message: "Internal server error" });
   }
 };
+
+export const acceptBooking = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { isAccepted } = req.body;
+
+    const booking = await Booking.findByIdAndUpdate(
+      id,
+      { isAccepted },
+      { new: true }
+    );
+
+    res.status(200).json({ booking });
+  } catch (error) {
+    res.status(500).json({ message: "Server Error" });
+  }
+};
+
+export const completeBooking = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { isCompleted } = req.body;
+
+    const booking = await Booking.findByIdAndUpdate(
+      id,
+      { isCompleted },
+      { new: true }
+    );
+
+    res.status(200).json({ booking });
+  } catch (error) {
+    res.status(500).json({ message: "Server Error" });
+  }
+};
+
+export const deleteBooking = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    await Booking.findByIdAndDelete(id);
+
+    res.status(200).json({ message: "Booking deleted" });
+  } catch (error) {
+    res.status(500).json({ message: "Server Error" });
+  }
+};
+
