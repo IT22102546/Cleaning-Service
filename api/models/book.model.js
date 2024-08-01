@@ -66,7 +66,15 @@ const bookingSchema = new mongoose.Schema({
     type: String,
     trim: true,
     default:"No any additional information"
-  }
+  },
+  isAccepted: {
+    type: Boolean,
+    default:false
+  },
+  isCompleted: {
+    type: Boolean,
+    default:false
+  },
 }, { timestamps: true });
 
 const Booking = mongoose.model('Booking', bookingSchema);

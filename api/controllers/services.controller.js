@@ -171,3 +171,4 @@ export const getProductsByCategory = async (req, res, next) => {
     next(error);
   }
 };
+
