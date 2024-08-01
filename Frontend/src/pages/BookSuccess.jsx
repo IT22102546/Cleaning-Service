@@ -11,7 +11,7 @@ export default function BookSuccess() {
             <img src="/images/boook.png" alt="" />
           </div>
           <div className="lg:w-2/3 text-center lg:text-left">
-            <h1 className="text-3xl text-secondary font-sans">Booking Submitted Successfully...</h1>
+            <h1 className="text-3xl text-secondary font-sans">Booking Submitted Successfully, We will contact you soon</h1>
             <p className="text-lg ">
               We will get contact with you as soon as possible for confirmation! 
             </p>

@@ -72,6 +72,31 @@ export default function DashBookingRequests() {
     }
   }, [currentUser._id, searchTerm, showAcceptedOnly, showCompletedOnly]);
 
+  /*useEffect(() => {
+    const fetchRequests = async () => {
+      try {
+        const res = await fetch(
+          `/api/book/get-bookings?searchTerm=${searchTerm}`
+        );
+        const data = await res.json();
+        if (res.ok) {
+          setRequests(data.requests);
+          setTotalRequests(data.totalRequests);
+          setTotalAcceptRequests(
+            data.requests.filter((req) => req.accepted).length
+          );
+          setTotalFinishedRequests(
+            data.requests.filter((req) => req.finished).length
+          );
+        }
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
+
+    fetchRequests();
+  }, [searchTerm]);*/
+
   const handleDeleteBooking = async () => {
     setShowModel(false);
     try {
@@ -333,3 +358,66 @@ export default function DashBookingRequests() {
     </div>
   );
 }
+
+
+
+
+/*
+const handleAcceptChange = async (id) => {
+    const requestToUpdate = requests.find((request) => request._id === id);
+    const newAcceptedStatus = !requestToUpdate.isAccepted;
+  
+    try {
+      const res = await fetch(`/api/book/update-book/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ isAccepted: newAcceptedStatus }),
+      });
+      if (res.ok) {
+        setRequests((prevRequests) =>
+          prevRequests.map((request) =>
+            request._id === id
+              ? { ...request, isAccepted: newAcceptedStatus }
+              : request
+          )
+        );
+        setTotalAcceptRequests((prev) =>
+          newAcceptedStatus ? prev + 1 : prev - 1
+        );
+      } else {
+        console.log("Failed to update request status");
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+  
+  const handleFinishChange = async (id) => {
+    const requestToUpdate = requests.find((request) => request._id === id);
+    const newCompletedStatus = !requestToUpdate.isCompleted;
+  
+    try {
+      const res = await fetch(`/api/book/update-book/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ isCompleted: newCompletedStatus }),
+      });
+      if (res.ok) {
+        setRequests((prevRequests) =>
+          prevRequests.map((request) =>
+            request._id === id
+              ? { ...request, isCompleted: newCompletedStatus }
+              : request
+          )
+        );
+        setTotalFinishedRequests((prev) =>
+          newCompletedStatus ? prev + 1 : prev - 1
+        );
+      } else {
+        console.log("Failed to update request status");
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+*/ 
