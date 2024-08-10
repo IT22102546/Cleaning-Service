@@ -80,7 +80,7 @@ export default function ProductPage() {
                     ))}
                   </ul>
                 </div>
-                <div>
+                {/* <div>
                   <h2 className="text-lg font-bold mb-4 text-secondary">Price Range</h2>
                   <ul>
                     {[
@@ -100,7 +100,7 @@ export default function ProductPage() {
                       </li>
                     ))}
                   </ul>
-                </div>
+                </div> */}
               </aside>
               <main className="w-3/4 p-4">
                 <div className="flex justify-between items-center mb-4">
@@ -136,7 +136,7 @@ export default function ProductPage() {
                       </h3>
                       <p className="text-gray-600">{product.category}</p>
                       
-                      <p className="text-xl font-bold">Rs. {product.price}.00</p>
+                      {/* <p className="text-xl font-bold">Rs. {product.price}.00</p> */}
                     </div>
                   ))}
                 </div>

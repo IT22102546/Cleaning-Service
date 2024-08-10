@@ -145,13 +145,13 @@ export default function Header() {
             </Link>
           )}
 
-          {currentUser && (
+          {/* {currentUser && (
             <Link to="/wishlist">
               <div className="flex relative text-primary">
                 <HiViewList className="mr-1" style={{ fontSize: "24px" }} />
               </div>
             </Link>
-          )}
+          )} */}
         </div>
       </div>
     </Navbar>
