@@ -87,7 +87,7 @@ export default function Categories() {
                       <p className={product.quantity < 5 ? 'text-red-500' : 'text-green-500'}>
                         {product.quantity < 5 ? 'Low Stock' : 'In Stock'}
                       </p>
-                      <p className="text-xl font-bold">Rs. {product.price}</p>
+                      {/*<p className="text-xl font-bold">Rs. {product.price}</p>*/}
                     </div>
                   ))}
                 </div>
