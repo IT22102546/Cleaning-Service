@@ -27,7 +27,11 @@ export default function AddProducts() {
     null,
     null,
   ]);
-  const [formData, setFormData] = useState({ images: [] });
+  const [videoFile, setVideoFile] = useState(null); // State for video file
+  const [videoUploadProgress, setVideoUploadProgress] = useState(null); // Progress state for video upload
+  const [videoUploadError, setVideoUploadError] = useState(null); // Error state for video upload
+  const [videoURL, setVideoURL] = useState(null); // State for storing video URL
+  const [formData, setFormData] = useState({ images: [], video: "" });
   const [publishError, setPublishError] = useState(null);
   const navigate = useNavigate();
   const [mainImageIndex, setMainImageIndex] = useState(0);
@@ -36,6 +40,10 @@ export default function AddProducts() {
     const newFiles = [...files];
     newFiles[index] = file;
     setFiles(newFiles);
+  };
+
+  const handleVideoFileChange = (file) => {
+    setVideoFile(file);
   };
 
   const handleUploadImage = (index) => {
@@ -84,6 +92,41 @@ export default function AddProducts() {
           const newImages = [...formData.images];
           newImages[index] = downloadURL;
           setFormData({ ...formData, images: newImages });
+        });
+      }
+    );
+  };
+
+  const handleUploadVideo = () => {
+    if (!videoFile) {
+      setVideoUploadError("Please select a video");
+      return;
+    }
+    setVideoUploadError(null);
+
+    const storage = getStorage(app);
+    const fileName = new Date().getTime() + "-" + videoFile.name;
+    const storageRef = ref(storage, fileName);
+    const uploadTask = uploadBytesResumable(storageRef, videoFile);
+
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        const progress =
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        setVideoUploadProgress(progress.toFixed(0));
+      },
+      (error) => {
+        setVideoUploadError("Video upload failed");
+        setVideoUploadProgress(null);
+        console.error(error);
+      },
+      () => {
+        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+          setVideoUploadProgress(null);
+          setVideoUploadError(null);
+          setVideoURL(downloadURL);
+          setFormData({ ...formData, video: downloadURL });
         });
       }
     );
@@ -159,7 +202,6 @@ export default function AddProducts() {
                   <option value="HotelCleaning">Hotel Cleaning</option>
                   <option value="RestaurentCleaning">Restaurent Cleaning</option>
                   <option value="OfficeBoyandMaidService">Office Boy and Maid Service</option>
-
                 </Select>
               </div>
               {[0, 1, 2, 3].map((index) => (
@@ -224,6 +266,43 @@ export default function AddProducts() {
                     />
                   )
               )}
+              {/* Video upload section */}
+              <div className="flex gap-4 items-center justify-between border-4 border-teal-500 border-dotted p-3">
+                <FileInput
+                  type="file"
+                  accept="video/*"
+                  onChange={(e) => handleVideoFileChange(e.target.files[0])}
+                />
+                <Button
+                  onClick={handleUploadVideo}
+                  type="button"
+                  size="sm"
+                  outline
+                  disabled={videoUploadProgress}
+                  className="bg-slate-400"
+                >
+                  {videoUploadProgress ? (
+                    <div className="w-16 h-16">
+                      <CircularProgressbar
+                        value={videoUploadProgress}
+                        text={`${videoUploadProgress || 0}`}
+                      />
+                    </div>
+                  ) : (
+                    "Upload Video"
+                  )}
+                </Button>
+              </div>
+              {videoUploadError && (
+                <Alert color="failure">{videoUploadError}</Alert>
+              )}
+              {videoURL && (
+                <video
+                  controls
+                  src={videoURL}
+                  className="w-full h-82 object-cover mt-4"
+                />
+              )}
               <ReactQuill
                 theme="snow"
                 placeholder="Description..."
@@ -233,24 +312,6 @@ export default function AddProducts() {
                   setFormData({ ...formData, description: sanitizedValue });
                 }}
               />
-              <div className="flex flex-col gap-4 sm:flex-row justify-between">
-                {/* <TextInput
-                  type="number"
-                  placeholder="Price"
-                  id="price"
-                  onChange={(e) =>
-                    setFormData({ ...formData, price: e.target.value })
-                  }
-                />
-                <TextInput
-                  type="number"
-                  placeholder="Quantity"
-                  id="stockQuantity"
-                  onChange={(e) =>
-                    setFormData({ ...formData, quantity: e.target.value })
-                  }
-                /> */}
-              </div>
               <Button type="submit" className="bg-slate-400">
                 Add Products
               </Button>

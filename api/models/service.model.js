@@ -25,6 +25,10 @@ const serviceSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    video: {
+      type: String,
+     
+    },
     category: {
       type: String,
       default: 'uncategorized',

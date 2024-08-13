@@ -11,7 +11,11 @@ export default function UpdateProducts() {
   const [files, setFiles] = useState([null, null, null, null]);
   const [imageUploadProgress, setImageUploadProgress] = useState([null, null, null, null]);
   const [imageUploadError, setImageUploadError] = useState([null, null, null, null]);
-  const [formData, setFormData] = useState({ images: [] });
+  const [videoFile, setVideoFile] = useState(null); // State for video file
+  const [videoUploadProgress, setVideoUploadProgress] = useState(null); // Progress state for video upload
+  const [videoUploadError, setVideoUploadError] = useState(null); // Error state for video upload
+  const [videoURL, setVideoURL] = useState(null); // State for storing video URL
+  const [formData, setFormData] = useState({ images: [], video: "" });
   const [publishError, setPublishError] = useState(null);
   const { productId } = useParams();
   const navigate = useNavigate();
@@ -28,6 +32,7 @@ export default function UpdateProducts() {
         }
         const product = data.products.find(p => p._id === productId);
         setFormData({ ...product, description: product.description || '' });
+        setVideoURL(product.video || ''); // Set initial video URL from product data
         setPublishError(null);
       } catch (error) {
         setPublishError(error.message);
@@ -41,6 +46,10 @@ export default function UpdateProducts() {
     const newFiles = [...files];
     newFiles[index] = file;
     setFiles(newFiles);
+  };
+
+  const handleVideoFileChange = (file) => {
+    setVideoFile(file);
   };
 
   const handleUploadImage = (index) => {
@@ -93,6 +102,41 @@ export default function UpdateProducts() {
     );
   };
 
+  const handleUploadVideo = () => {
+    if (!videoFile) {
+      setVideoUploadError("Please select a video");
+      return;
+    }
+    setVideoUploadError(null);
+
+    const storage = getStorage(app);
+    const fileName = new Date().getTime() + "-" + videoFile.name;
+    const storageRef = ref(storage, fileName);
+    const uploadTask = uploadBytesResumable(storageRef, videoFile);
+
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        const progress =
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        setVideoUploadProgress(progress.toFixed(0));
+      },
+      (error) => {
+        setVideoUploadError("Video upload failed");
+        setVideoUploadProgress(null);
+        console.error(error);
+      },
+      () => {
+        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+          setVideoUploadProgress(null);
+          setVideoUploadError(null);
+          setVideoURL(downloadURL);
+          setFormData({ ...formData, video: downloadURL });
+        });
+      }
+    );
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -111,7 +155,7 @@ export default function UpdateProducts() {
 
       if (res.ok) {
         setPublishError(null);
-        navigate('/dashboard?tab=products');
+        navigate('/dashboard?tab=services');
       }
     } catch (error) {
       setPublishError('Something went wrong');
@@ -163,20 +207,31 @@ export default function UpdateProducts() {
         {formData.images.map((image, index) => (
           image && <img key={index} src={image} alt="upload" className="w-full h-82 object-cover" />
         ))}
+
+        {/* Video upload section */}
+        <div className='flex gap-4 items-center justify-between border-4 border-teal-500 border-dotted p-3'>
+          <FileInput type='file' accept='video/*' onChange={(e) => handleVideoFileChange(e.target.files[0])} />
+          <Button onClick={handleUploadVideo} type='button' size='sm' outline disabled={videoUploadProgress}>
+            {videoUploadProgress ? (
+              <div className="w-16 h-16">
+                <CircularProgressbar value={videoUploadProgress} text={`${videoUploadProgress || 0}`} />
+              </div>
+            ) : ('Upload Video')}
+          </Button>
+        </div>
+        {videoUploadError && (
+          <Alert color='failure'>{videoUploadError}</Alert>
+        )}
+        {videoURL && (
+          <video controls src={videoURL} className="w-full h-82 object-cover mt-4" />
+        )}
+
         <Textarea
           placeholder="Description..."
           className="h-52 mb-12"
           onChange={(e) => setFormData({ ...formData, description: e.target.value })}
           value={formData.description || ''}
         />
-        {/* <div className='flex flex-col gap-4 sm:flex-row justify-between'>
-          <TextInput type="number" placeholder="Price" id="price" onChange={(e) =>
-            setFormData({ ...formData, price: e.target.value })
-          } value={formData.price || ''} />
-          <TextInput type="number" placeholder="Quantity" id="stockQuantity" onChange={(e) =>
-            setFormData({ ...formData, quantity: e.target.value })
-          } value={formData.quantity || ''} />
-        </div> */}
         <Button type='submit' gradientDuoTone='purpleToBlue'>Update</Button>
         {publishError && (
           <Alert className='mt-5' color='failure'>

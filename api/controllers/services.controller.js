@@ -67,7 +67,7 @@ export const updateProduct = async (req, res, next) => {
     if (!req.user.isAdmin || req.user.id !== req.params.userId) {
       return next(errorHandler(403, 'You are not allowed to update this post'));
     }
-    if (!req.body.title || !req.body.description || !req.body.price || !req.body.quantity) {
+    if (!req.body.title || !req.body.description) {
       return next(errorHandler(400, 'Please provide all required fields'));
     }
 
@@ -80,7 +80,7 @@ export const updateProduct = async (req, res, next) => {
           category: req.body.category,
           images: req.body.images,
           price: req.body.price,
-          quantity: req.body.quantity,
+          video:req.body.video,
         },
       },
       { new: true }
