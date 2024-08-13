@@ -148,7 +148,7 @@ export default function PostProduct() {
                 )}
                 <h1 className="text-3xl my-7 font-semibold">{product.title}</h1>
                 <p>{product.description}</p>
-                {/*<div className="flex flex-col gap-4 sm:flex-row justify-between mt-4">
+               {/*} <div className="flex flex-col gap-4 sm:flex-row justify-between mt-4">
                   <span>Price: Rs. {product.price}</span>
                   
                 </div>*/}

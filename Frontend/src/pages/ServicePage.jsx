@@ -100,7 +100,7 @@ export default function ProductPage() {
                       </li>
                     ))}
                   </ul>
-                </div>*/}
+                </div> */}
               </aside>
               <main className="w-3/4 p-4">
                 <div className="flex justify-between items-center mb-4">
