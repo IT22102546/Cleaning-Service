@@ -34,7 +34,7 @@ export default function Categories() {
 
     fetchProductsByCategory('GeneralCommercialCleaning', setGeneralCommercialCleaning);
     fetchProductsByCategory('HighPresureWaterBlasting', setHighPressureWaterBlasting);
-    fetchProductsByCategory('CarpetSteamCleaningAndMaintains', setCarpetSteamCleaningAndMaintains);
+    fetchProductsByCategory('CarpetSteamCleaningandMaintains', setCarpetSteamCleaningAndMaintains);
     fetchProductsByCategory('BuildersCleaning', setBuildersCleaning);
     fetchProductsByCategory('BondCleaning', setBondCleaning);
     fetchProductsByCategory('HouseResidentialCleaning', setHouseResidentialCleaning);
