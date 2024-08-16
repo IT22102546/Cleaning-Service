@@ -48,7 +48,19 @@ export const getOneBooking = async (req, res, next) => {
 
 export const createBooking = async (req, res, next) => {
   const { name, email, phone, address, city, state, zip, paymentMethod, serviceType, date, allergies, additional } = req.body;
-  const bookId = phone;
+
+  const generateRandomLetters = (length) => {
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+    let result = '';
+    for (let i = 0; i < length; i++) {
+      result += characters.charAt(Math.floor(Math.random() * characters.length));
+    }
+    return result;
+  };
+
+  const randomLetters = generateRandomLetters(4); // Adjust the number of random letters as needed
+  const bookId = `${phone}-${randomLetters}`;
+
 
   if (!name || !phone || !address || !city || !state || !zip || !paymentMethod || !serviceType || !date || !email) {
     next(errorHandler(400, "All fields are required"));
