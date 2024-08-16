@@ -30,14 +30,14 @@ export default function BookingForm() {
       });
 
       const data = await res.json();
-      console.log(data);
-      setLoading(false);
-
-      if (!data.success) {
-        setError(data.message);
-        return;
-      }
-      navigate("/success-book");
+            console.log(data);
+            setLoading(false);
+            if (data.success === false) {
+                setError(data.message);
+                return;
+            }
+            navigate('/success-book');
+      
     } catch (error) {
       setLoading(false);
       setError(error.message);
