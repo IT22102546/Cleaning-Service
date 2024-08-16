@@ -37,16 +37,16 @@ export default function Categories() {
     fetchProductsByCategory('CarpetSteamCleaningandMaintains', setCarpetSteamCleaningAndMaintains);
     fetchProductsByCategory('BuildersCleaning', setBuildersCleaning);
     fetchProductsByCategory('BondCleaning', setBondCleaning);
-    fetchProductsByCategory('HouseResidentialCleaning', setHouseResidentialCleaning);
+    fetchProductsByCategory('HouseResidentalCleaning', setHouseResidentialCleaning);
     fetchProductsByCategory('OfficeCleaning', setOfficeCleaning);
     fetchProductsByCategory('WarehouseCleaning', setWarehouseCleaning);
     fetchProductsByCategory('HospitalCleaning', setHospitalCleaning);
     fetchProductsByCategory('SchoolCleaning', setSchoolCleaning);
     fetchProductsByCategory('NewlyConstructedCleaning', setNewlyConstructedCleaning);
-    fetchProductsByCategory('GovernmentProjectCleaning', setGovernmentProjectCleaning);
+    fetchProductsByCategory('GovernmentProjecCleaning', setGovernmentProjectCleaning);
     fetchProductsByCategory('HotelCleaning', setHotelCleaning);
-    fetchProductsByCategory('RestaurantCleaning', setRestaurantCleaning);
-    fetchProductsByCategory('OfficeBoyAndMaidService', setOfficeBoyAndMaidService);
+    fetchProductsByCategory('RestaurentCleaning', setRestaurantCleaning);
+    fetchProductsByCategory('OfficeBoyandMaidService', setOfficeBoyAndMaidService);
   }, []);
 
   return (
