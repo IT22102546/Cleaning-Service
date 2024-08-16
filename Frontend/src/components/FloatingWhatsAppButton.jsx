@@ -1,7 +1,7 @@
 import React from 'react';
 
 const FloatingWhatsAppButton = () => {
-  const phoneNumber = '94701194600'; // Replace with your WhatsApp phone number in international format without '+'
+  const phoneNumber = '94769899882'; // Replace with your WhatsApp phone number in international format without '+'
 
   const handleClick = () => {
     window.open(`https://wa.me/${phoneNumber}`, '_blank');

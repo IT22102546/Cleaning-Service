@@ -63,7 +63,6 @@ export default function FeaturedProducts() {
                                                     className="w-full h-48 object-cover rounded-md mb-4"
                                                 />
                                                 <h3 className="text-xl font-semibold mb-2">{product.title}</h3>
-                                                <p className="text-lg font-bold text-blue-600">Rs. {product.price}</p>
                                             </div>
                                         </Link>
                                     </div>
