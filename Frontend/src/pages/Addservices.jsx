@@ -187,6 +187,7 @@ export default function AddProducts() {
                     setFormData({ ...formData, category: e.target.value })
                   }
                 >
+                  <option value="" disabled>Please select one</option>
                   <option value="GeneralCommercialCleaning">General Commercial Cleaning</option>
                   <option value="HighPresureWaterBlasting">High Presure Water Blasting</option>
                   <option value="CarpetSteamCleaningandMaintains">Carpet Steam Cleaning and Maintains</option>
