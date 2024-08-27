@@ -1,5 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { TitleContext } from '../components/TitleContext';
 
 export default function Categories() {
   const [generalCommercialCleaning, setGeneralCommercialCleaning] = useState([]);
@@ -17,8 +18,10 @@ export default function Categories() {
   const [hotelCleaning, setHotelCleaning] = useState([]);
   const [restaurantCleaning, setRestaurantCleaning] = useState([]);
   const [officeBoyAndMaidService, setOfficeBoyAndMaidService] = useState([]);
+  const { setTitle } = useContext(TitleContext); 
 
   useEffect(() => {
+    setTitle('Categories');
     const fetchProductsByCategory = async (category, setState) => {
       try {
         const response = await fetch(`/api/products/category?category=${category}`);
@@ -47,7 +50,7 @@ export default function Categories() {
     fetchProductsByCategory('HotelCleaning', setHotelCleaning);
     fetchProductsByCategory('RestaurantCleaning', setRestaurantCleaning);
     fetchProductsByCategory('OfficeBoyAndMaidService', setOfficeBoyAndMaidService);
-  }, []);
+  }, [setTitle]);
 
   return (
     <div className="relative bg-white min-h-screen flex items-center justify-center">

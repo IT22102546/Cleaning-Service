@@ -21,12 +21,29 @@ import BookingForm from "./pages/BookingForm";
 import BookSuccess from "./pages/BookSuccess";
 import UpdateBooking from "./pages/UpdateBooking";
 import FloatingWhatsAppButton from "./components/FloatingWhatsAppButton";
+import {Helmet} from "react-helmet";
+import { TitleContext, TitleProvider } from "./components/TitleContext";
+import { useContext } from "react";
 
 
-export default function App() {
+export default function App({description,keywords,author,}) {
+
+  const { title } = useContext(TitleContext);
   return (
+    <TitleProvider> 
    <BrowserRouter>
+   
+    
+   
+        
        <Header/>
+       <Helmet>
+                <meta charSet="utf-8" />
+                <meta name="description" content={description}/>
+                <meta name="keywords" content={keywords}/>
+                <meta name="author" content={author}/>
+                <title>{title}</title>
+            </Helmet>
     <Routes>
    
     <Route path="/" element={<Home/>}/>
@@ -58,6 +75,14 @@ export default function App() {
     <Footer/>
     <FloatingWhatsAppButton />
    </BrowserRouter>
+   </TitleProvider>
 
   )
 }
+
+App.defaultProps = {
+  title: "General Commercial Cleaning",
+  description: "Cleaning Service website.",
+  keywords: "Cleaning, General Commercial Cleaning, High Presure Water Blasting, Carpet Cleaning, Builder Cleaning, Bond Cleaning, House cleaning , Office cleaning, cleaning, Cleaning, Hotel cleaning , School Cleaning, Restaurant Cleaning, warehouse cleaning",
+  author: "yoyo",
+};

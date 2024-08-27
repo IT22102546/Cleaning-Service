@@ -4,11 +4,15 @@ import './index.css';
 import { store, persistor } from './redux/store.js';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
+import { TitleProvider } from './components/TitleContext.jsx';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <PersistGate persistor={persistor}>
     <Provider store={store}>
-      <App />
+      <TitleProvider>
+        <App />
+      </TitleProvider>
+     
     </Provider>
   </PersistGate>
 );
