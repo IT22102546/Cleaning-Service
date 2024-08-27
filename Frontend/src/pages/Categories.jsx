@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { TitleContext } from '../components/TitleContext';
+
 
 export default function Categories() {
   const [generalCommercialCleaning, setGeneralCommercialCleaning] = useState([]);
