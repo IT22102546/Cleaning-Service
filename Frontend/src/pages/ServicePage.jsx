@@ -67,6 +67,21 @@ export default function ProductPage() {
                       "BondCleaning",
                       "HighPressureWaterCleaning",
                       "HospitalCleaning",
+                      "OfficeBoyAndMaidService",
+                      "RestaurantCleaning",
+                      "GovernmentProjecCleaning",
+                      "HotelCleaning",
+                      "GovernmentProjecCleaning",
+                      "NewlyConstructedCleaning",
+                      "SchoolCleaning",
+                      "WarehouseCleaning",
+                      "OfficeCleaning",
+                      "HouseResidentalCleaning",
+                      "BuildersCleaning",
+                      "CarpetSteamCleaningandMaintains"
+
+
+
                     ].map((category) => (
                       <li
                         key={category}
@@ -112,7 +127,7 @@ export default function ProductPage() {
                     className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
                   />
                   <span className="text-lg font-semibold">
-                    Total Products: {totalProducts}
+                    Total Services: {totalProducts}
                   </span>
                 </div>
 

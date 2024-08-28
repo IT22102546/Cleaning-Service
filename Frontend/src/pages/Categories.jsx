@@ -87,9 +87,9 @@ export default function Categories() {
                         <Link to={`/product/${product.slug}`}>{product.title}</Link>
                       </h3>
                       <p className="text-gray-600">{product.category}</p>
-                      <p className={product.quantity < 5 ? 'text-red-500' : 'text-green-500'}>
+                     { /*<p className={product.quantity < 5 ? 'text-red-500' : 'text-green-500'}>
                         {product.quantity < 5 ? 'Low Stock' : 'In Stock'}
-                      </p>
+                      </p>*/}
                       {/*<p className="text-xl font-bold">Rs. {product.price}</p>*/}
                     </div>
                   ))}

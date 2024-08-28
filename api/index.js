@@ -22,9 +22,9 @@ const __dirname = path.resolve();
 const app = express();
 app.use(express.json());
 
-app.use(express.static(path.join(__dirname, '/Frontend/dist')))
+app.use(express.static(path.join(__dirname,"Frontend/dist")));
 app.get('*',(req,res)=>{
-    res.sendFile(path.join(__dirname,'Frontend' , 'dist' , 'index.html'))
+    res.sendFile(path.join(__dirname,'Frontend' , 'dist' , 'index.html'));
 })
 app.use(cookieParser());
 
