@@ -1,7 +1,7 @@
 import ContactForm from "../components/ContactUs";
 import FeaturedProducts from "../components/FeaturedProducts";
 import { Link } from "react-router-dom";
-
+import { Helmet } from "react-helmet";
 
 export default function Home() {
 
@@ -13,6 +13,10 @@ export default function Home() {
 ];
   return (
     <div className="relative bg-white min-h-screen flex items-center justify-center">
+      <Helmet>
+        <title>Best Cleaning Service in Sri Lanka | General Commercial Cleaning </title>
+        <meta name="description" content="Experience unmatched quality with our top-rated cleaning services in Sri Lanka. Book now!" />
+      </Helmet>
       <div className="container mx-auto px-6 lg:px-8 py-12">
         <div className="flex flex-col lg:flex-row items-center mt-20">
         <section className="hero-section"></section>
