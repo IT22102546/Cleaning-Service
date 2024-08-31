@@ -34,7 +34,7 @@ export default function DashSideBar() {
   };
 
   return (
-    <Sidebar className="w-full md:w-56 mt-20">
+    <Sidebar className="w-full md:w-56 mt-20" style={{height:'300px'}}>
         
         <Sidebar.Items >
         <Sidebar.ItemGroup>

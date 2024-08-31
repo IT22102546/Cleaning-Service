@@ -81,7 +81,7 @@ export default function App({description,keywords,author,}) {
 }
 
 App.defaultProps = {
-  title: "General Commercial Cleaning",
+  title: "Eaton Cleaning Service",
   description: "Cleaning Service website.",
   keywords: "Cleaning, General Commercial Cleaning, High Presure Water Blasting, Carpet Cleaning, Builder Cleaning, Bond Cleaning, House cleaning , Office cleaning, cleaning, Cleaning, Hotel cleaning , School Cleaning, Restaurant Cleaning, warehouse cleaning",
   author: "yoyo",

@@ -69,12 +69,12 @@ export default function SignIn() {
         <div className="flex p-3 max-w-3xl mx-auto flex-col md:flex-row md:items-center gap-20 ">
             {/* left */}
             <motion.div 
-                    className="flex-1"
+                    className="flex-1 hidden md:block"
                     initial={{ x: -300, opacity: 0 }}
                     animate={{ x: 0, opacity: 1 }}
                     transition={{ duration: 1 }}>
                 <Link to ="/" className="text-5xl font-bold dark:text-white font-tangerine">
-                    <span className="px-2 py-1 bg-gradient-to-r from-indigo-500 via purple-500 to-pink-500  text-white rounded-lg  size-10/12" >Company</span>Logo
+                    <span className="px-2 py-1 bg-gradient-to-r from-indigo-500 via purple-500 to-pink-500  text-white rounded-lg  size-10/12" >GCC</span>Cleaning
                 </Link>
                 <p className="text-sm mt-5 font-cinzel font-gray font-semibold">Join with us to get good cleaning service to your place</p>
             </motion.div>
@@ -125,12 +125,12 @@ export default function SignIn() {
                 
                 <div className="flex gap-2 text-sm mt-5 ">
                     <span>Forget Password?</span>
-                    <Link to='/forgetPassword' className="text-blue-500">Click Here</Link>
+                    <Link to='/forgetPassword' className="text-blue-950 font-bold">Click Here</Link>
                 </div>
 
                 <div className="flex gap-2 text-sm mt-5 ">
                     <span>Dont have an Account?</span>
-                    <Link to='/sign-up' className="text-blue-500">Sign Up</Link>
+                    <Link to='/sign-up' className="text-blue-950 font-bold">Sign Up</Link>
                 </div>
                 <div className="text-red-600">
                 {

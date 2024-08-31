@@ -53,7 +53,7 @@ export default function Home() {
                     <span className="material-icons "><box-icon name='phone-call' type='solid' size='md' color='#2B0996' ></box-icon></span>
                     <div>
                       <span className="text-gray-800 ml-2 font-semibold"> Call us</span><br />
-                      <span href="tel:+01234567890" className="text-gray-800 ml-2">011 456 7890</span>
+                      <span href="tel:+01234567890" className="text-gray-800 ml-2">0777574274</span>
                     </div>
                   </div>
                 </div>
@@ -63,7 +63,7 @@ export default function Home() {
                     <span className="material-icons text-orange-500"><box-icon name='envelope' size='md' color='#2B0996'></box-icon></span>
                     <div>
                       <span className="text-gray-800 ml-2 font-semibold"> Email</span><br />
-                      <span href="tel:+01234567890" className="text-gray-800 ml-2">info@email.com</span>
+                      <span href="tel:+01234567890" className="text-gray-800 ml-2">djsanjaya46@gmail.com</span>
                     </div>
                   </div>
                 </div>
@@ -73,7 +73,7 @@ export default function Home() {
                     <span className="material-icons text-orange-500"><box-icon name='location-plus' type='solid' size='md' color='#2B0996' ></box-icon></span>
                     <div>
                       <span className="text-gray-800 ml-2 font-semibold"> Location</span><br />
-                      <span href="tel:+01234567890" className="text-gray-800 ml-2">location ek dnn oneee...</span>
+                      <span href="tel:+94777574274" className="text-gray-800 ml-2 text-sm ">11 Samanpura,Dambulla road,Kurunegala</span>
                     </div>
                   </div>
                 </div>
@@ -83,7 +83,7 @@ export default function Home() {
             
           </div>
           <div className="lg:w-1/2 mt-8 lg:mt-0">
-            <div className="relative">
+            <div className="hidden md:block relative">
               <div style={{marginTop:"-55px"}} >
                 <img src="/images/cleaner.png" alt="Cleaner" className="hidden md:block mx-auto lg:mx-0 self-center justify-center" />
               </div>
@@ -145,7 +145,7 @@ export default function Home() {
               </p>
             </div>
           </div>
-
+          <FeaturedProducts/>
           <div className="container mx-auto p-4 mt-20">
             <div className="text-center my-8">
               <h1 className="text-3xl font-bold mb-4 text-secondary">OUR SERVICES</h1>
@@ -172,7 +172,7 @@ export default function Home() {
 
             </div>
           </div>
-          <FeaturedProducts/>
+         
 
       <ContactForm/>
 

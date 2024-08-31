@@ -60,7 +60,7 @@ export default function ForgetPassword() {
         }}>
             <div className="flex p-3 max-w-3xl mx-auto flex-col md:flex-row md:items-center gap-20">
                 <motion.div 
-                    className="flex-1"
+                    className="flex-1 hidden md:block"
                     initial={{ x: -300, opacity: 0 }}
                     animate={{ x: 0, opacity: 1 }}
                     transition={{ duration: 1 }} className="flex-1 mt-48">

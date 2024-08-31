@@ -7,7 +7,7 @@ import {
   Navbar,
 } from "flowbite-react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import { HiUser, HiViewList } from "react-icons/hi";
+import { HiUser, HiViewList, HiMenu } from "react-icons/hi";
 import { useDispatch, useSelector } from "react-redux";
 import { signOut } from "../redux/user/userSlice";
 import { useEffect, useState } from "react";
@@ -17,6 +17,7 @@ export default function Header() {
   const { currentUser } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const handleSignOut = async () => {
     try {
@@ -63,12 +64,22 @@ export default function Header() {
                 <span className="text-secondary">G</span>CC
               </span>
             </div><br />
-          <span className="hidden md:block text-sm font-sans absolute top-16">General Commercial Cleaning</span>
-           
+            <span className="hidden md:block text-sm font-sans absolute top-16">General Commercial Cleaning</span>
           </NavLink>
         </div>
 
-        <div className="flex space-x-8">
+        {/* Mobile Menu Toggle */}
+        <div className="md:hidden">
+          <button
+            onClick={() => setMenuOpen(!menuOpen)}
+            className="text-black focus:outline-none"
+          >
+            <HiMenu className="w-8 h-8" />
+          </button>
+        </div>
+
+        {/* Desktop Navigation Links */}
+        <div className={`md:flex ${menuOpen ? "block" : "hidden"} space-x-8`}>
           <NavLink
             to="/"
             className={({ isActive }) =>
@@ -99,16 +110,9 @@ export default function Header() {
           >
             Services
           </NavLink>
-          {/* <NavLink 
-            to="/blogs" 
-            className={({ isActive }) => 
-              isActive ? "nav-item nav-item-active text-black font-semibold" : "nav-item text-black"
-            }
-          >
-            Blogs
-          </NavLink> */}
         </div>
 
+        {/* Profile and Wishlist */}
         <div className="flex space-x-8 items-center">
           {currentUser ? (
             <Dropdown
@@ -145,14 +149,30 @@ export default function Header() {
             </Link>
           )}
 
-          {currentUser && (
-            <Link to="/wishlist">
-              <div className="flex relative text-primary">
-                <HiViewList className="mr-1" style={{ fontSize: "24px" }} />
-              </div>
-            </Link>
-          )}
+         
         </div>
+      </div>
+      
+      {/* Mobile Menu Links */}
+      <div className={`md:hidden ${menuOpen ? "block" : "hidden"} py-2`}>
+        <NavLink
+          to="/"
+          className="block py-2 px-4 text-black hover:bg-gray-100"
+        >
+          Home
+        </NavLink>
+        <NavLink
+          to="/category"
+          className="block py-2 px-4 text-black hover:bg-gray-100"
+        >
+          Categories
+        </NavLink>
+        <NavLink
+          to="/product-page"
+          className="block py-2 px-4 text-black hover:bg-gray-100"
+        >
+          Services
+        </NavLink>
       </div>
     </Navbar>
   );
