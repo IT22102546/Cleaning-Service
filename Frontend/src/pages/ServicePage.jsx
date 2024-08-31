@@ -68,7 +68,6 @@ export default function ProductPage() {
                   "RestaurantCleaning",
                   "GovernmentProjecCleaning",
                   "HotelCleaning",
-                  "GovernmentProjecCleaning",
                   "NewlyConstructedCleaning",
                   "SchoolCleaning",
                   "WarehouseCleaning",

@@ -6,21 +6,21 @@ import { Link } from "react-router-dom";
 export default function Home() {
 
   const categories = [
-    { name: 'GeneralCommercialCleaning', imageUrl: 'https://example.com/general-commercial-cleaning.jpg' },
-    { name: 'HighPresureWaterBlasting', imageUrl: 'https://example.com/high-pressure-water-blasting.jpg' },
-    { name: 'CarpetSteamCleaningandMaintains', imageUrl: 'https://example.com/carpet-steam-cleaning.jpg' },
-    { name: 'BuildersCleaning', imageUrl: 'https://example.com/builders-cleaning.jpg' },
-    { name: 'BondCleaning', imageUrl: 'https://example.com/bond-cleaning.jpg' },
-    { name: 'HouseResidentalCleaning', imageUrl: 'https://example.com/house-residential-cleaning.jpg' },
-    { name: 'OfficeCleaning', imageUrl: 'https://example.com/office-cleaning.jpg' },
-    { name: 'WarehouseCleaning', imageUrl: 'https://example.com/warehouse-cleaning.jpg' },
-    { name: 'HospitalCleaning', imageUrl: 'https://example.com/hospital-cleaning.jpg' },
-    { name: 'SchoolCleaning', imageUrl: 'https://example.com/school-cleaning.jpg' },
-    { name: 'NewlyConstructedCleaning', imageUrl: 'https://example.com/newly-constructed-cleaning.jpg' },
-    { name: 'GovernmentProjecCleaning', imageUrl: 'https://example.com/government-project-cleaning.jpg' },
-    { name: 'HotelCleaning', imageUrl: 'https://example.com/hotel-cleaning.jpg' },
-    { name: 'RestaurentCleaning', imageUrl: 'https://example.com/restaurant-cleaning.jpg' },
-    { name: 'OfficeBoyandMaidService', imageUrl: 'https://example.com/office-boy-maid-service.jpg' }
+    { name: 'GeneralCommercialCleaning', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwQfDxge2LAaeQV1hU6QSnQUPbAazVfDCcNQ&s' },
+    { name: 'HighPresureWaterBlasting', imageUrl: 'https://www.psi-industrialsolutions.com/images/PSI-Industrial-Solutions-Water-Blasting-3.jpg' },
+    { name: 'CarpetSteamCleaningandMaintains', imageUrl: 'https://media.istockphoto.com/id/168614906/photo/steam-cleaning-carpets.jpg?s=612x612&w=0&k=20&c=KXePH53VwqxOyyhTOmA3NEOBItALsxX0p67FTql3DlI=' },
+    { name: 'BuildersCleaning', imageUrl: 'https://capitalcleaning.ca/wp-content/uploads/2024/02/affordable_post_construction_cleaning_options.jpg' },
+    { name: 'BondCleaning', imageUrl: 'https://www.bondcleaninginbrisbane.com.au/wp-content/uploads/2021/07/end-of-lease-clean.jpg' },
+    { name: 'HouseResidentalCleaning', imageUrl: 'https://i0.wp.com/www.orchidcs.com/wp-content/uploads/2019/07/Regular-Cleaning-Services.jpg?fit=1210%2C723&ssl=1' },
+    { name: 'OfficeCleaning', imageUrl: 'https://thecleanstart.com/wp-content/uploads/2021/05/commercial-office-cleaning.jpg' },
+    { name: 'WarehouseCleaning', imageUrl: 'https://5.imimg.com/data5/IB/YF/MY-8486210/ware-house-cleaning-500x500.jpg' },
+    { name: 'HospitalCleaning', imageUrl: 'https://crestclean.co.nz/wp-content/uploads/2018/05/Hospital-cleaning-operating-Hastings-CrestClean-800.jpg' },
+    { name: 'SchoolCleaning', imageUrl: 'https://cdn.prod.website-files.com/642b7859216b0f5b519de88a/6499d064af82681f0dd1fdd9_education-mopping-image-1.jpg' },
+    { name: 'NewlyConstructedCleaning', imageUrl: 'https://geauxmaids.com/wp-content/uploads/2020/08/post-construction-cleaning-in-Baton-Rouge.jpg' },
+    { name: 'GovernmentProjecCleaning', imageUrl: 'https://gjkfacilityservices.com.au/wp-content/uploads/2022/05/invisible-heroes.png' },
+    { name: 'HotelCleaning', imageUrl: 'https://static.vecteezy.com/system/resources/thumbnails/046/946/760/small/pretty-woman-cleaning-room-in-hotel-lady-with-vacuum-cleaner-hoovering-floor-housekeeping-service-video.jpg' },
+    { name: 'RestaurentCleaning', imageUrl: 'https://aonedeepcleaning.in/assets/img/restaurant-deep-cleaning-service-sm.jpg' },
+    { name: 'OfficeBoyandMaidService', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7s1sScnM9JKZ-UxNomcWI61MR83R0bdzpB4qTJEdjGXPD8HmSwlo7QssIoCLX4f3CmBE&usqp=CAU' }
 ];
 
   return (
@@ -159,20 +159,19 @@ export default function Home() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 
             {categories.map((category, index) => (
-              
-              <div className="bg-white shadow-md rounded-lg overflow-hidden" key={category._id}>
-                <img src="/services/commercial-cleaning.jpeg" alt="Commercial Cleaning" className="w-full h-48 object-cover"/>
+              <div className="bg-white shadow-md rounded-lg overflow-hidden" key={index}>
+                <img src={category.imageUrl} alt={category.name} className="w-full h-48 object-cover"/>
                 <div className="p-6">
                   <h2 className="text-xl font-bold mb-2">{category.name}</h2>
                   <p className="text-gray-700 mb-4">We proudly announce that we are the leading Commercial office cleaning supplier...</p>
                   <Link to={`/product-page?category=${category.name}`}>
-                  <h3 className="text-blue-600 hover:underline">VISIT MORE &rarr;</h3>
+                    <h3 className="text-blue-600 hover:underline">VISIT MORE &rarr;</h3>
                   </Link>
                 </div>
               </div>
-                ))}
+            ))}
 
-            </div>
+          </div>
           </div>
          
 
