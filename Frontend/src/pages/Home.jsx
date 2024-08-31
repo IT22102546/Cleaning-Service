@@ -47,7 +47,7 @@ export default function Home() {
               </Link>
             </div>
             <div className="flex justify-center lg:justify-start items-center space-x-4 mt-10">
-              <div className=" flex md:flex items-center md:gap-16 gap-10 mx-auto">
+              <div className=" flex md:flex items-center md:gap-18 gap-10 mx-auto">
                 <div>
                   <div className="flex-row md:flex mx-auto">
                     <span className="material-icons "><box-icon name='phone-call' type='solid' size='md' color='#2B0996' ></box-icon></span>
@@ -73,7 +73,7 @@ export default function Home() {
                     <span className="material-icons text-orange-500"><box-icon name='location-plus' type='solid' size='md' color='#2B0996' ></box-icon></span>
                     <div>
                       <span className="text-gray-800 ml-2 font-semibold"> Location</span><br />
-                      <span href="tel:+94777574274" className="text-gray-800 ml-2 text-sm ">11 Samanpura,Dambulla road,Kurunegala</span>
+                      <span href="tel:+94777574274" className="text-gray-800 ml-2  text-sm ">11 Samanpura,Dambulla road,Kurunegala</span>
                     </div>
                   </div>
                 </div>
@@ -88,9 +88,11 @@ export default function Home() {
                 <img src="/images/cleaner.png" alt="Cleaner" className="hidden md:block mx-auto lg:mx-0 self-center justify-center" />
               </div>
               <div className="absolute top-0 right-0 mt-10 mr-4">
-                <div className="bg-secondary p-2 rounded-full shadow-md hover:bg-blue-900 transition hover:cursor-pointer">
-                  <img src="/images/facebook.png" alt="Facebook" className="w-4 h-4 mx-auto" />
-                </div>
+              <a href="https://www.facebook.com/profile.php?id=61565314887430" target="_blank" rel="noopener noreferrer">
+                  <div className="bg-secondary p-2 rounded-full shadow-md hover:bg-blue-900 transition hover:cursor-pointer">
+                    <img src="/images/facebook.png" alt="Facebook" className="w-4 h-4 mx-auto" />
+                  </div>
+                </a>
                 <div className="bg-secondary p-2 rounded-full shadow-md mt-2 hover:bg-blue-900 transition hover:cursor-pointer">
                   <img src="/images/instagram.png" alt="Instagram" className="w-4 h-4" />
                 </div>
